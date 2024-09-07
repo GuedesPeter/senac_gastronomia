@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <form action="{% url 'sigin' %}" method="POST" class="card card-body">
+                {% csrf_token %}
+                <h1 class="text-center">Login</h1>
+
+                <!-- Exibir mensagens -->
+                {% if messages %}
+                    <div>
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nome de Usuário</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome de usuário">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha">
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">ACESSAR</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
