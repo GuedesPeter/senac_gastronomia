@@ -34,8 +34,8 @@ class SigupView(TemplateView):
         user = User.objects.create_user(username=username, password=password1)
         user.save()
 
-        # Redireciona para a página 'home.html' após o cadastro bem-sucedido, DEVERÁ REDIRECIONAR PARA A LISTA.
-        return redirect('home')
+        # Redireciona para a página 'sigin.html' após o cadastro bem-sucedido
+        return redirect('sigin')
 
 
 class SiginView(TemplateView):
