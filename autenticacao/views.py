@@ -58,7 +58,7 @@ class SiginView(TemplateView):
             login(request, user)
             return redirect('escolha') 
         else:
-            # Exibir mensagem de erro se o login falhar
+            # Exibir mensagem de erro se o login falhar/ redireciona para login
             messages.error(request, 'Nome de usuário ou senha inválidos.')
             return redirect('sigin')
         
