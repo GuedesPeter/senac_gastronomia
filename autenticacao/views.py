@@ -35,7 +35,7 @@ class SigupView(TemplateView):
         user.save()
 
         # Redireciona para a página 'home.html' após o cadastro bem-sucedido, DEVERÁ REDIRECIONAR PARA A LISTA.
-        return redirect('home')
+        return redirect('sigin')
 
 
 class SiginView(TemplateView):
