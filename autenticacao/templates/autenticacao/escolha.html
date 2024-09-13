@@ -5,26 +5,27 @@
 <main class="container mt-5">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
-
     <div class="card-group">
         <div class="card1">
-          <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
-          <div class="card-body">
-            <h5>GESTÃO DE ESTOQUE</h5>
-            <p class="card-text">Controle inteligente, estoque eficiente.</p>
-
-          </div>
+          <a href="{% url 'estoque' %}">
+            <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
+            <div class="card-body">
+              <h5>GESTÃO DE ESTOQUE</h5>
+              <p class="card-text">Controle inteligente, estoque eficiente.</p>
+            </div>
+          </a>
         </div>
         
         <div class="card2">
-          <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
-          <div class="card-body">
-            <h5>GESTÃO FINANCEIRA</h5>
-            <p class="card-text">Controle o presente, construa o futuro.</p>
-          </div>
+          <a href="{% url 'financeiro' %}">
+            <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
+            <div class="card-body">
+              <h5>GESTÃO FINANCEIRA</h5>
+              <p class="card-text">Controle o presente, construa o futuro.</p>
+            </div>
+          </a>
         </div>
       </div>
       
 </main>
-
 {% endblock %}

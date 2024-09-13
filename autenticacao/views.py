@@ -73,3 +73,12 @@ class ExitView(TemplateView):
         logout(request)
         # Redireciona para a página inicial após o logout
         return redirect('sigin')
+    
+
+
+
+def estoque(request):
+    return render(request, 'estoque.html')  # Substitua 'estoque.html' pelo template correto para a página de gestão de estoque
+
+def financeiro(request):
+    return render(request, 'financeiro.html')  # Substitua 'financeiro.html' pelo template correto para a página de gestão financeira
