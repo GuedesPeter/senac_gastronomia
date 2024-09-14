@@ -1,0 +1,39 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+ 
+  
+  
+.home {
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    width: 100vw;  /* Ocupa 100% da largura da tela */
+    background: 
+        url(/static/img/home_bg1.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+.home-bg {
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  width: 100vw;  /* Ocupa 100% da largura da tela */
+  background: 
+      url(/static/img/bg2.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+  
+.menu {
+    background: 
+        url(/static/img/home_bgmenu.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+.carousel-img {
+  border-radius: 15px; /* Arredonda as bordas das imagens */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra atrás das imagens */
+}

@@ -1,0 +1,137 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+ 
+/* Estilo geral da página */
+body {
+    font-family: 'Nunito', sans-serif; /* Fonte do texto */
+    background-color: #f8f9fa; /* Cor de fundo clara */
+} 
+  
+.home {
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    width: 100vw;  /* Ocupa 100% da largura da tela */
+    background: 
+        url(/static/img/home_bg1.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+.home-bg {
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  width: 100vw;  /* Ocupa 100% da largura da tela */
+  background: 
+      url(/static/img/bg2.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+  
+.menu {
+    background: 
+        url(/static/img/home_bgmenu.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+/* Estilo do container principal */
+.container {
+  max-width: 100%;
+  padding: 20px;
+}
+
+/* Estilo do formulário de login */
+.card {
+  text-align: left;
+  background-color: #ffffff; /* Fundo branco para o formulário */
+  border-radius: 10px; /* Cantos arredondados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  padding: 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card h1 {
+  font-size: 2rem; /* Tamanho do título */
+  color: #333333; /* Cor do título */
+  margin-bottom: 20px; /* Espaço abaixo do título */
+}
+
+/* Estilo das mensagens de erro */
+.alert {
+  margin-bottom: 15px; /* Espaço abaixo da mensagem */
+  padding: 10px;
+  border-radius: 5px; /* Cantos arredondados */
+}
+
+.alert-danger {
+  background-color: #f8d7da; /* Fundo vermelho claro */
+  color: #721c24; /* Cor do texto da mensagem */
+}
+
+/* Estilo dos rótulos dos campos de entrada */
+.form-label {
+  text-align: left;
+  font-weight: 600; /* Peso do texto dos rótulos */
+  color: #333333; /* Cor do texto dos rótulos */
+  margin-bottom: 5px; /* Espaço abaixo do rótulo */
+  display: block;
+}
+
+/* Estilo dos campos de entrada */
+.form-control {
+  border-radius: 5px; /* Cantos arredondados */
+  border: 1px solid #ced4da; /* Borda leve */
+  padding: 10px;
+  font-size: 1rem; /* Tamanho da fonte */
+  margin-bottom: 15px; /* Espaço abaixo do campo */
+}
+
+/* Estilo do botão */
+.btn-primary {
+  background-color: #007bff; /* Cor de fundo azul */
+  border: none;
+  border-radius: 5px; /* Cantos arredondados */
+  color: #ffffff; /* Cor do texto */
+  font-size: 1rem; /* Tamanho da fonte */
+  padding: 10px;
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Cor de fundo mais escura ao passar o mouse */
+}
+
+
+
+
+
+
+
+
+
+
+/* .card1{
+  background:url(/static/img/slide1.jpg) ;
+
+}
+.card2{
+
+}
+
+.card-group {
+
+  text-align: center;
+  border-radius: 15px;
+} */
+
+ /* .carousel-img {
+  width: 100%;
+  height: 100%;
+   
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}  */

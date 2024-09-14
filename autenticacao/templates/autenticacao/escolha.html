@@ -3,40 +3,30 @@
 
 {% block content %}
 <main class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div id="carouselExampleCaptions" class="carousel slide">
-                <div class="carousel-inner">
-                    <!-- Primeiro Slide -->
-                    <div class="carousel-item active">
-                        {% comment %} <a href="{% url 'estoque' %}"> <!-- Link para a aplicação de estoque --> {% endcomment %}
-                            <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>GESTÃO DE ESTOQUE</h5>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Segundo Slide -->
-                    <div class="carousel-item">
-                        {% comment %} <a href="{% url 'financeiro' %}"> <!-- Link para a aplicação financeira --> {% endcomment %}
-                            <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>GESTÃO FINANCEIRA</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</main>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static './css/escolha.css' %}">
 
+    <div class="card-group">
+        <div class="card1">
+          <a href="{% url 'estoque' %}">
+            <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
+            <div class="card-body">
+              <h5>GESTÃO DE ESTOQUE</h5>
+              <p class="card-text">Controle inteligente, estoque eficiente.</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card2">
+          <a href="{% url 'financeiro' %}">
+            <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
+            <div class="card-body">
+              <h5>GESTÃO FINANCEIRA</h5>
+              <p class="card-text">Controle o presente, construa o futuro.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+</main>
 {% endblock %}

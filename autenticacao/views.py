@@ -35,7 +35,7 @@ class SigupView(TemplateView):
         user.save()
 
         # Redireciona para a página 'home.html' após o cadastro bem-sucedido, DEVERÁ REDIRECIONAR PARA A LISTA.
-        return redirect('home')
+        return redirect('sigin')
 
 
 class SiginView(TemplateView):
@@ -58,7 +58,7 @@ class SiginView(TemplateView):
             login(request, user)
             return redirect('escolha') 
         else:
-            # Exibir mensagem de erro se o login falhar
+            # Exibir mensagem de erro se o login falhar/ redireciona para login
             messages.error(request, 'Nome de usuário ou senha inválidos.')
             return redirect('sigin')
         
@@ -73,3 +73,6 @@ class ExitView(TemplateView):
         logout(request)
         # Redireciona para a página inicial após o logout
         return redirect('sigin')
+    
+
+

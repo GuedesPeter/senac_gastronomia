@@ -1,0 +1,63 @@
+/* Estilo escolha */
+
+a {
+    text-decoration: none;
+  } 
+.card-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .card1, .card2 {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 500px;
+    overflow: hidden;
+  }
+  
+  .card1:hover, .card2:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo da imagem */
+  .card1 img, .card2 img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  
+  /* Estilo do conteúdo do card */
+  .card-body {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif; /* Definindo Nunito como fonte */
+  }
+  
+  .card-body h5 {
+    font-size: 1.5rem;
+    font-weight: 700; /* Negrito para o título */
+    color: #333333;
+    margin-bottom: 15px;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .card-body p {
+    font-size: 1rem;
+    font-weight: 600; /* Peso normal para o texto */
+    color: #666666;
+    margin-bottom: 15px;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  /* Animação ao passar o mouse */
+  .card1:hover img, .card2:hover img {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  
