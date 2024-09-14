@@ -75,13 +75,3 @@ class ExitView(TemplateView):
         return redirect('sigin')
     
 
-
-<<<<<<< HEAD
-=======
-
-def estoque(request):
-    return render(request, 'estoque.html')  # Substitua 'estoque.html' pelo template correto para a página de gestão de estoque
-
-# def financeiro(request):
-#     return render(request, 'financeiro.html')  # Substitua 'financeiro.html' pelo template correto para a página de gestão financeira
->>>>>>> a3a7816afa6f92e3b255ac7a2084968ecd62a183
