@@ -80,5 +80,5 @@ class ExitView(TemplateView):
 def estoque(request):
     return render(request, 'estoque.html')  # Substitua 'estoque.html' pelo template correto para a página de gestão de estoque
 
-def financeiro(request):
-    return render(request, 'financeiro.html')  # Substitua 'financeiro.html' pelo template correto para a página de gestão financeira
+# def financeiro(request):
+#     return render(request, 'financeiro.html')  # Substitua 'financeiro.html' pelo template correto para a página de gestão financeira
