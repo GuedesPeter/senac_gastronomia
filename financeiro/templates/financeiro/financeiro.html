@@ -1,2 +1,96 @@
-<h1>Home de Financeiro</h1>
+{% extends "base_financeiro.html" %}
 
+{% block content %}
+<div class="container-fluid">
+    <h1 class="fw-bold">Gestão Financeira</h1>
+
+    <!-- Filtros -->
+    <div class="filters">
+        <form method="get" class="row g-2 justify-content-center" >
+            <div class="col-md-1 m-4">
+                <input type="text" name="categoria" class="form-control" placeholder="Categoria" value="{{ categoria }}">
+            </div>
+            <div class="col-md-1 m-4">
+                <input type="text" name="validade" class="form-control" placeholder="Validade" value="{{ validade }}">
+            </div>
+            <div class="col-md-1 m-4">
+                <input type="text" name="data_entrada" class="form-control" placeholder="Data de Entrada" value="{{ data_entrada }}">
+            </div>
+            <div class="col-md-1 m-4">
+                <input type="text" name="fornecedor" class="form-control" placeholder="Fornecedor" value="{{ fornecedor }}">
+            </div>
+            <div class="col-md-1 m-4">
+                <input type="text" name="marca" class="form-control" placeholder="Marca" value="{{ marca }}">
+            </div>
+            <div class="col-md-1 m-4">
+                <select name="ordenar_por" class="form-select">
+                    <option value="nome" {% if ordenar_por == "nome" %}selected{% endif %}>Nome</option>
+                    <option value="quantidade" {% if ordenar_por == "quantidade" %}selected{% endif %}>Quantidade</option>
+                    <option value="valor" {% if ordenar_por == "valor" %}selected{% endif %}>Valor</option>
+                    <option value="data_entrada" {% if ordenar_por == "data_entrada" %}selected{% endif %}>Data de Entrada</option>
+                </select>
+            </div>
+            
+            <div class="d-flex gap-2 mb-2">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a href="{% url 'financeiro' %}" class="btn btn-secondary">Limpar Filtros</a>
+                <a href="#" class="btn btn-info">Gerar Relatório PDF</a>
+            </div>
+            
+        </form>
+    </div>
+
+    <!-- Métricas -->
+    <div class="metrics mb-4 row">
+        <div class="metric col-md-6">
+            <h2>Quantidade Total de Produtos</h2>
+            <p>{{ quantidade_total }}</p>
+        </div>
+        <div class="metric col-md-6">
+            <h2>Custo Total do Estoque</h2>
+            <p>R$ {{ custo_total }}</p>
+        </div>
+    </div>
+
+    <!-- Tabela de Produtos -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><a href="?{% if ordenar_por == 'nome' %}ordenar_por=-nome{% else %}ordenar_por=nome{% endif %}">Nome</a></th>
+                <th><a href="?{% if ordenar_por == 'quantidade' %}ordenar_por=-quantidade{% else %}ordenar_por=quantidade{% endif %}">Quantidade</a></th>
+                <th><a href="?{% if ordenar_por == 'peso' %}ordenar_por=-peso{% else %}ordenar_por=peso{% endif %}">Peso</a></th>
+                <th><a href="?{% if ordenar_por == 'referencia' %}ordenar_por=-referencia{% else %}ordenar_por=referencia{% endif %}">Referência</a></th>
+                <th><a href="?{% if ordenar_por == 'categoria' %}ordenar_por=-categoria{% else %}ordenar_por=categoria{% endif %}">Categoria</a></th>
+                <th><a href="?{% if ordenar_por == 'validade' %}ordenar_por=-validade{% else %}ordenar_por=validade{% endif %}">Validade</a></th>
+                <th><a href="?{% if ordenar_por == 'valor' %}ordenar_por=-valor{% else %}ordenar_por=valor{% endif %}">Valor</a></th>
+                <th><a href="?{% if ordenar_por == 'data_entrada' %}ordenar_por=-data_entrada{% else %}ordenar_por=data_entrada{% endif %}">Data de Entrada</a></th>
+                <th><a href="?{% if ordenar_por == 'nro_nota' %}ordenar_por=-nro_nota{% else %}ordenar_por=nro_nota{% endif %}">Número da Nota</a></th>
+                <th><a href="?{% if ordenar_por == 'nome_fornecedor' %}ordenar_por=-nome_fornecedor{% else %}ordenar_por=nome_fornecedor{% endif %}">Fornecedor</a></th>
+                <th><a href="?{% if ordenar_por == 'marca' %}ordenar_por=-marca{% else %}ordenar_por=marca{% endif %}">Marca</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alimento in alimentos %}
+            <tr>
+                <td>{{ alimento.nome }}</td>
+                <td>{{ alimento.quantidade }}</td>
+                <td>{{ alimento.peso }}</td>
+                <td>{{ alimento.referencia }}</td>
+                <td>{{ alimento.categoria.nome }}</td>
+                <td>{{ alimento.validade|date:"d/m/Y" }}</td>
+                <td>R$ {{ alimento.valor }}</td>
+                <td>{{ alimento.data_entrada|date:"d/m/Y" }}</td>
+                <td>{{ alimento.nro_nota }}</td>
+                <td>{{ alimento.nome_fornecedor }}</td>
+                <td>{{ alimento.marca }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="11" class="text-center">Nenhum alimento encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+{% endblock %}

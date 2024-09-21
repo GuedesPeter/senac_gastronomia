@@ -1,0 +1,243 @@
+/* Corpo */
+body {
+    font-family: 'Arial', sans-serif; /* Define a fonte padrão para Arial, com fallback para sans-serif */
+    background-color: #f4f4f4; /* Cor de fundo clara para todo o corpo da página */
+    margin: 0; /* Remove a margem padrão do corpo */
+    padding: 0; /* Remove o preenchimento (padding) padrão do corpo */
+}
+
+/* Fonte */
+.fontes {
+    font-family: 'Verdana', sans-serif; /* Define a fonte padrão para Verdana, com fallback para sans-serif */
+}
+
+/* Container */
+
+
+/* Título */
+h1 {
+    text-align: center; /* Centraliza o texto do título (h1) */
+    color: #333; /* Cor do texto do título em cinza escuro */
+    border-bottom: 3px solid #333; /* Adiciona uma borda inferior de 3px em cinza escuro */
+    padding-bottom: 10px; /* Adiciona um preenchimento de 10px na parte inferior do título */
+    margin-bottom: 20px; /* Adiciona uma margem de 20px abaixo do título */
+}
+
+
+
+
+
+
+/* Filtros */
+/* Filtros */
+.filters {
+    margin-bottom: 20px; /* Margem inferior de 20px */
+}
+
+.filters form {
+    display: flex; /* Usa layout flexível para o formulário de filtros */
+    flex-wrap: wrap; /* Permite que os elementos se movam para a linha seguinte, se necessário */
+    gap: 10px; /* Espaço de 10px entre os elementos */
+    justify-content: flex-start; /* Alinha os itens ao início do container (lado esquerdo) */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+}
+
+.filters .form-control,
+.filters .form-select {
+    flex: 1; /* Faz com que os inputs e selects cresçam para ocupar o espaço disponível */
+    min-width: 120px; /* Define uma largura mínima para evitar que os elementos fiquem muito pequenos */
+    padding: 8px; /* Adiciona preenchimento dentro dos elementos */
+    border: 1px solid #ddd; /* Borda fina e cinza clara */
+    border-radius: 4px; /* Cantos arredondados */
+    font-size: 14px; /* Tamanho da fonte */
+    box-sizing: border-box; /* Inclui o padding e a borda no cálculo da largura total */
+}
+
+.filters .btn {
+    flex: 1; /* Faz com que os botões cresçam para ocupar o espaço disponível */
+    min-width: 120px; /* Define uma largura mínima para evitar que os botões fiquem muito pequenos */
+    padding: 8px; /* Adiciona preenchimento dentro dos botões */
+    display: flex; /* Alinha o texto centralizado */
+    justify-content: center; /* Centraliza o texto horizontalmente */
+    align-items: center; /* Centraliza o texto verticalmente */
+}
+
+.filters .btn-group {
+    display: flex; /* Usa layout flexível para o grupo de botões */
+    gap: 10px; /* Espaço de 10px entre os botões */
+    flex-wrap: wrap; /* Permite que os botões se movam para a linha seguinte, se necessário */
+    margin-top: 10px; /* Adiciona margem superior para separar os botões dos inputs */
+    width: 100%; /* Faz com que o grupo de botões ocupe a largura total disponível */
+    justify-content: flex-start; /* Alinha os botões ao início do container (lado esquerdo) */
+}
+
+/* Estilo dos Botões */
+.filters .btn-primary {
+    background-color: #007bff; /* Cor do botão Filtrar */
+    color: #fff; /* Cor do texto */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Cantos arredondados */
+}
+
+.filters .btn-primary:hover {
+    background-color: #0056b3; /* Efeito hover do botão Filtrar */
+}
+
+.filters .btn-secondary {
+    background-color: #dc3545; /* Cor do botão Limpar */
+    color: #fff; /* Cor do texto */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Cantos arredondados */
+}
+
+.filters .btn-secondary:hover {
+    background-color: #c82333; /* Efeito hover do botão Limpar */
+}
+
+.filters .btn-info {
+    background-color: #17a2b8; /* Cor do botão Gerar Relatório PDF */
+    color: #fff; /* Cor do texto */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Cantos arredondados */
+}
+
+.filters .btn-info:hover {
+    background-color: #138496; /* Efeito hover do botão Gerar Relatório PDF */
+}
+
+
+/* Botões de Filtros */
+.filters button,
+.filters a.clear-button,
+.filters a.report-button {
+    padding: 8px 12px; /* Adiciona preenchimento vertical e horizontal */
+    color: #fff; /* Cor do texto */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Cantos arredondados */
+    cursor: pointer; /* Cursor pointer */
+    text-align: center; /* Centraliza o texto dentro dos botões */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    font-size: 14px; /* Tamanho da fonte */
+    margin-right: 10px; /* Espaço à direita dos botões */
+}
+
+.filters button {
+    background-color: #007bff; /* Cor do botão Filtrar */
+}
+
+.filters button:hover {
+    background-color: #0056b3; /* Efeito hover do botão Filtrar */
+}
+
+.filters a.clear-button {
+    background-color: #dc3545; /* Cor do botão Limpar */
+}
+
+.filters a.clear-button:hover {
+    background-color: #c82333; /* Efeito hover do botão Limpar */
+}
+
+.filters a.report-button {
+    background-color: #28a745; /* Cor do botão Relatório */
+}
+
+.filters a.report-button:hover {
+    background-color: #218838; /* Efeito hover do botão Relatório */
+}
+
+/* Métricas */
+/* Métricas */
+.metrics {
+    display: flex; /* Usa layout flexível para a área de métricas */
+    gap: 20px; /* Define um espaço de 20px entre os elementos de métricas */
+    margin-bottom: 20px; /* Adiciona uma margem inferior de 20px abaixo das métricas */
+    flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte se não houver espaço suficiente */
+}
+
+.metric {
+    flex: 1 1 30%; /* Permite que as métricas ocupem espaços iguais com uma largura base de 30% */
+    padding: 15px; /* Adiciona um preenchimento interno de 15px ao redor das métricas */
+    background-color: #e2e6ea; /* Define um fundo cinza claro para as métricas */
+    color: #333; /* Define a cor do texto das métricas em cinza escuro */
+    border-radius: 5px; /* Arredonda os cantos das métricas em 5px */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve ao redor das métricas */
+    min-width: 250px; /* Define uma largura mínima para as métricas */
+    max-width: 100%; /* Garante que as métricas não ultrapassem a largura do container */
+}
+
+.metric h2 {
+    margin-top: 0; /* Remove a margem superior do título das métricas */
+    color: #333; /* Define a cor do texto do título das métricas em cinza escuro */
+}
+
+.metric p {
+    margin: 5px 0; /* Define uma margem vertical de 5px entre os parágrafos das métricas */
+}
+
+
+/* Tabela */
+table {
+    width: 100%; /* Faz com que a tabela ocupe 100% da largura disponível */
+    border-collapse: collapse; /* Remove os espaços entre as bordas da tabela */
+    margin-bottom: 20px; /* Adiciona uma margem inferior de 20px abaixo da tabela */
+}
+
+table, th, td {
+    border: 1px solid #ddd; /* Define uma borda fina e cinza clara ao redor da tabela, cabeçalhos e células */
+}
+
+th, td {
+    padding: 12px; /* Adiciona 12px de preenchimento dentro das células da tabela */
+    text-align: left; /* Alinha o conteúdo das células à esquerda */
+    font-size: 14px; /* Define o tamanho da fonte como 14px */
+}
+
+thead {
+    background-color: #f1f1f1; /* Define um fundo cinza claro para o cabeçalho da tabela */
+    color: #333; /* Define a cor do texto do cabeçalho da tabela em cinza escuro */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Define o fundo cinza muito claro para as linhas pares */
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* Define o fundo branco para as linhas ímpares */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Altera a cor de fundo para cinza claro ao passar o mouse sobre uma linha */
+}
+
+/* Mensagem de Tabela Vazia */
+.empty-message {
+    text-align: center; /* Centraliza o texto da mensagem quando a tabela está vazia */
+    padding: 20px; /* Adiciona um preenchimento de 20px ao redor da mensagem */
+    color: #888; /* Define a cor do texto como cinza claro */
+}
+
+
+.home {
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    width: 100vw;  /* Ocupa 100% da largura da tela */
+    background: 
+        url(/static/img/home_bg1.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+
+.home-bg {
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  width: 100vw;  /* Ocupa 100% da largura da tela */
+  background: 
+      url(/static/img/bg2.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+  
+.menu {
+    background: 
+        url(/static/img/home_bgmenu.jpg) no-repeat center center;
+    background-size: cover;
+    
+}
