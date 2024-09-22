@@ -8,7 +8,7 @@
 
     <div class="card-group">
         <div class="card1">
-          <a href="{% url 'estoque' %}">
+          <a href="{% url 'alimento_list' %}">  <!-- URL para a lista de alimentos -->
             <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
             <div class="card-body">
               <h5>GESTÃO DE ESTOQUE</h5>
@@ -18,7 +18,7 @@
         </div>
         
         <div class="card2">
-          <a href="{% url 'financeiro' %}">
+          <a href="{% url 'financeiro' %}">  <!-- Certifique-se de que essa URL está definida -->
             <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
             <div class="card-body">
               <h5>GESTÃO FINANCEIRA</h5>
@@ -26,7 +26,6 @@
             </div>
           </a>
         </div>
-      </div>
-      
+    </div>
 </main>
 {% endblock %}
