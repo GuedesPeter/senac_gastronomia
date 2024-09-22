@@ -1,21 +1,15 @@
-
-
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
- 
-  
-  
-.home {
-    height: 100vh; /* Ocupa 100% da altura da tela */
-    width: 100vw;  /* Ocupa 100% da largura da tela */
-    background: 
-        url(/static/img/home_bg1.jpg) no-repeat center center;
-    background-size: cover;
+  margin: 0;
+  padding: 0;
 }
 
+.home {
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  width: 100vw;  /* Ocupa 100% da largura da tela */
+  background: 
+      url(/static/img/home_bg1.jpg) no-repeat center center;
+  background-size: cover;
+}
 
 .home-bg {
   height: 100vh; /* Ocupa 100% da altura da tela */
@@ -25,15 +19,82 @@
   background-size: cover;
 }
 
-  
 .menu {
-    background: 
-        url(/static/img/home_bgmenu.jpg) no-repeat center center;
-    background-size: cover;
+  background: 
+      url(/static/img/home_bgmenu.jpg) no-repeat center center;
+  background-size: cover;
 }
-
 
 .carousel-img {
   border-radius: 15px; /* Arredonda as bordas das imagens */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra atrás das imagens */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background: rgba(0, 0, 0, 0.7); /* Fundo translúcido */
+    border-radius: 15px; /* Bordas arredondadas */
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    padding: 20px; /* Padding interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+.sidebar h4 {
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.sidebar .nav {
+    flex-direction: column; /* Alinha os itens em coluna */
+}
+
+.sidebar .btn {
+    width: 100%; /* Botões ocupam toda a largura */
+    padding: 15px; /* Padding dos botões */
+    color: #fff; /* Cor do texto */
+    border-radius: 5px; /* Arredondar os cantos dos botões */
+    margin-bottom: 10px; /* Espaçamento entre os botões */
+    transition: background-color 0.3s ease; /* Transição suave */
+}
+
+.sidebar .btn:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Efeito hover */
+}
+
+
+/* Main content */
+.main-content {
+  padding: 20px;
+}
+
+/* Cards */
+.card {
+  margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table th, .table td {
+  vertical-align: middle;
+}
+
+/* Button Styles */
+.btn {
+  border-radius: 0.25rem;
+}
+
+
+.modal-content {
+  background: rgba(0, 0, 0, 0.7) !important; /* Fundo da modal */
+}
+
+.modal-header, .modal-footer {
+  border: none; /* Remove bordas */
+}
+
+.text-white {
+  color: #ffffff !important; /* Texto branco */
+}
+
+.bg-translucido {
+  background-color: rgba(0, 0, 0, 0.7); /* Ajuste a cor e a opacidade conforme necessário */
+  border-radius: 15px; /* Bordas arredondadas */
 }

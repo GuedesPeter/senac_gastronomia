@@ -1,1 +1,225 @@
-<h1>Home de Estoque</h1>
+{% extends 'base_estoque.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-2 d-md-block" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px;">
+            <div class="position-sticky">
+                <h4 class="text-light text-center mt-3 p-2">Gestão de Estoque</h4>
+                <div class="nav flex-column">
+                    <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#addCategoriaModal">
+                        <i class="bi bi-tag-fill"></i> Adicionar Categorias
+                    </button>
+                    <button class="btn btn-outline-primary mb-2" onclick="location.href='{% url 'alimento_create' %}'">
+                        <i class="bi bi-box-seam"></i> Adicionar Alimento
+                    </button>
+                    <button class="btn btn-outline-primary mb-2" onclick="location.href='#'">
+                        <i class="bi bi-box-seam"></i> Devoluções
+                    </button>
+                    <button class="btn btn-outline-danger mb-2" onclick="location.href='#'">
+                        <i class="bi bi-box-seam"></i> Itens Vencidos
+                    </button>
+                    
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <!-- Navbar -->
+            
+
+            <!-- Dashboard Cards -->
+            <div class="row mb-4 justify-content-center">
+                <div class="col-md-3">
+                    <div class="card border-primary mb-3" style="background: rgba(0, 0, 0, 0.5); height: 150px;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="card-title text-primary fw-bold" style="text-transform: uppercase;">Total de Alimentos</h5>
+                            <p class="card-text text-light">{{ alimentos.count }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-success mb-3" style="background: rgba(0, 0, 0, 0.5); height: 150px;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="card-title text-success fw-bold" style="text-transform: uppercase;">Valor itens da Categoria: {{ categoria_atual }}</h5>
+                            <p class="card-text text-light">R$ {{ valor_total_categoria|floatformat:2 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card border-danger mb-3" style="background: rgba(0, 0, 0, 0.5); height: 150px;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h5 class="card-title text-danger fw-bold" style="text-transform: uppercase;">Itens Vencidos</h5>
+                            <p class="card-text text-light">{{ alimentos_vencidos.count }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="mb-4" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px; padding: 15px;">
+                <form method="get">
+                    <div class="row g-2">
+                        <div class="col-md-2">
+                            <select name="categoria" class="form-select" onchange="this.form.submit()" style="font-weight: bold; color: black;">
+                                <option value="">Categoria</option>
+                                {% for categoria in categorias %}
+                                    <option value="{{ categoria.id }}" {% if categoria.id == request.GET.categoria %}selected{% endif %}>
+                                        {{ categoria.nome }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ request.GET.nome }}" style="font-weight: bold; color: black;">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="referencia" class="form-control" placeholder="Ref." value="{{ request.GET.referencia }}" style="font-weight: bold; color: black;">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="date" name="data_entrada" class="form-control" value="{{ request.GET.data_entrada }}" style="font-weight: bold; color: black;">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" name="nro_nota" class="form-control" placeholder="Nº Nota" value="{{ request.GET.nro_nota }}" style="font-weight: bold; color: black;">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-outline-primary w-100">Filtrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tabela de Estoque -->
+            <div class="table-responsive" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px; padding: 15px;">
+                <table class="table table-hover table-dark mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Referência</th>
+                            <th>Categoria</th>
+                            <th>Quantidade</th>
+                            <th>Peso (kg/L)</th>
+                            <th>Validade</th>
+                            <th>Valor (R$)</th>
+                            <th>Data de Entrada</th>
+                            <th>Nº Nota</th>
+                            <th>Fornecedor</th>
+                            <th>Marca</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alimento in alimentos %}
+                        <tr>
+                            <td>{{ alimento.nome }}</td>
+                            <td>{{ alimento.referencia }}</td>
+                            <td>{{ alimento.categoria.nome }}</td>
+                            <td>{{ alimento.quantidade }}</td>
+                            <td>{{ alimento.peso }}</td>
+                            <td>{{ alimento.validade }}</td>
+                            <td>{{ alimento.valor }}</td>
+                            <td>{{ alimento.data_entrada }}</td>
+                            <td>{{ alimento.nro_nota }}</td>
+                            <td>{{ alimento.nome_fornecedor }}</td>
+                            <td>{{ alimento.marca }}</td>
+                            <td>
+                                <a href="{% url 'alimento_update' alimento.pk %}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ alimento.pk }}">
+                                    Excluir
+                                </button>
+                                {% if alimento.status_validade != 'Vencido' %}
+                                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#utilizarModal{{ alimento.pk }}">
+                                    Utilizar
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal para Adicionar Categoria -->
+            <div class="modal fade" id="addCategoriaModal" tabindex="-1" aria-labelledby="addCategoriaModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background: rgba(0, 0, 0, 0.7);">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-white fw-bold" id="addCategoriaModalLabel">Adicionar Categoria</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" action="{% url 'categoria_create' %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <label for="categoriaNome" class="text-white fw-bold">Nome da Categoria:</label>
+                                <input type="text" class="form-control" id="categoriaNome" name="nome" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-success">Adicionar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <!-- Modal de Utilização -->
+            {% for alimento in alimentos %}
+            <div class="modal fade" id="utilizarModal{{ alimento.pk }}" tabindex="-1" aria-labelledby="utilizarModalLabel{{ alimento.pk }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background: rgba(0, 0, 0, 0.7);">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-white fw-bold" id="utilizarModalLabel{{ alimento.pk }}">Utilizar {{ alimento.nome }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" action="{% url 'utilizar_alimento' alimento.pk %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <label for="quantidade{{ alimento.pk }}" class="text-white fw-bold">Quantidade a Utilizar:</label>
+                                <input type="number" id="quantidade{{ alimento.pk }}" name="quantidade" class="form-control" min="1" max="{{ alimento.quantidade }}" required>
+                                <label for="peso{{ alimento.pk }}" class="mt-3 text-white fw-bold">Peso a Utilizar (Kg/L):</label>
+                                <input type="number" id="peso{{ alimento.pk }}" name="peso" class="form-control" step="0.01" min="0.01" max="{{ alimento.peso }}" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-success">Confirmar Utilização</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Modal de Exclusão -->
+            {% for alimento in alimentos %}
+            <div class="modal fade" id="deleteModal{{ alimento.pk }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ alimento.pk }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background: rgba(0, 0, 0, 0.7);">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-white fw-bold" id="deleteModalLabel{{ alimento.pk }}">Confirmar Exclusão</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-white">
+                            Você tem certeza que deseja excluir o alimento "{{ alimento.nome }}"?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <form action="{% url 'alimento_delete' alimento.pk %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger">Confirmar Exclusão</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+
+        </main>
+    </div>
+</div>
+{% endblock %}
