@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'autenticacao', # APP CRIADO
     'estoque', # APP CRIADO
     'financeiro', # APP CRIADO
+    'widget_tweaks', # Lib. para melhoria dos templates
     
 
 ]

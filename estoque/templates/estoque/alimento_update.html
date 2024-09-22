@@ -1,0 +1,88 @@
+{% extends 'base_estoque.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-1 mb-2 pb-2">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="post" class="p-4 rounded-3 border border-secondary shadow-sm" style="background: rgba(0, 0, 0, 0.7);">
+                <h1 class="mb-4 text-center text-white fw-bold">Editar Alimento</h1>
+                {% csrf_token %}
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id_categoria" class="form-label text-white fw-bold">Categoria:</label>
+                        <select name="categoria" class="form-control form-control-sm custom-input" style="background: rgba(255, 255, 255, 0.3); color: black;">
+                            <option value="">Selecione:</option>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}" {% if categoria.id == form.categoria.value %}selected{% endif %}>{{ categoria.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_referencia" class="form-label text-white fw-bold">Referência:</label>
+                        {{ form.referencia|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id_nome" class="form-label text-white fw-bold">Nome:</label>
+                        {{ form.nome|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_quantidade" class="form-label text-white fw-bold">Quantidade:</label>
+                        {{ form.quantidade|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id_peso" class="form-label text-white fw-bold">Peso (Kg):</label>
+                        {{ form.peso|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_validade" class="form-label text-white fw-bold">Validade:</label>
+                        {{ form.validade|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id_valor" class="form-label text-white fw-bold">Valor:</label>
+                        {{ form.valor|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_data_entrada" class="form-label text-white fw-bold">Data de Entrada:</label>
+                        {{ form.data_entrada|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id_nro_nota" class="form-label text-white fw-bold">Número da Nota:</label>
+                        {{ form.nro_nota|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="id_nome_fornecedor" class="form-label text-white fw-bold">Nome do Fornecedor:</label>
+                        {{ form.nome_fornecedor|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id_marca" class="form-label text-white fw-bold">Marca:</label>
+                        {{ form.marca|add_class:"form-control form-control-sm custom-input" }}
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-outline-success me-md-2">Atualizar</button>
+                    <a href="{% url 'alimento_list' %}" class="btn btn-outline-danger">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.custom-input {
+    height: 40px; /* Ajuste a altura conforme necessário */
+}
+</style>
+{% endblock %}
