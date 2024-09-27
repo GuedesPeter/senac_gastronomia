@@ -1,5 +1,11 @@
 /* Estilo escolha */
-
+.container mt-5 {
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  width: 100vw;  /* Ocupa 100% da largura da tela */
+  background: 
+    url(/static/img/home_bg1.jpg) no-repeat center center;
+  background-size: cover;
+}
 a {
     text-decoration: none;
   } 
@@ -60,4 +66,6 @@ a {
     transform: scale(1.05);
     transition: transform 0.3s ease;
   }
-  
+  .bg-light {
+    --bs-bg-opacity: 100%;
+  }
