@@ -1,17 +1,22 @@
-from django.shortcuts import render
-
 # Create your views here.
 
+<<<<<<< HEAD
 
 # def financeiro(request):
 #     return render(request, 'financeiro/financeiro.html')  
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from django.template.loader import get_template
+=======
+>>>>>>> 511debd2956f28d34db39f8470da5fce68b4b2a7
 from django.shortcuts import render
 from estoque.models import Alimento
 from datetime import datetime
+from django.db.models import Sum
+from .models import Alimento
 
+
+# FINACEIRO
 def financeiro(request):
     # Obter os parâmetros de filtragem e ordenação da URL
     categoria = request.GET.get('categoria', '')
@@ -32,7 +37,7 @@ def financeiro(request):
     alimentos = Alimento.objects.all()
 
     if categoria:
-        alimentos = alimentos.filter(categoria__nome__icontains=categoria)
+        alimentos = alimentos.filter(categoria_nome_icontains=categoria)
     if validade:
         validade_convertida = converter_data(validade)
         if validade_convertida:
@@ -73,6 +78,7 @@ def financeiro(request):
     return render(request, 'financeiro/financeiro.html', context)
 
 
+<<<<<<< HEAD
 def gerar_pdf(request):
     # Obter os parâmetros de filtragem e ordenação da URL
     categoria = request.GET.get('categoria', '')
@@ -142,6 +148,36 @@ def gerar_pdf(request):
         return HttpResponse('Erro ao gerar PDF', status=500)
     
     return response
+=======
 
+# DASHBOARD VIEW
+def dashboard(request):
+    alimentos = Alimento.objects.all()
+>>>>>>> 511debd2956f28d34db39f8470da5fce68b4b2a7
 
+    # Calcular totais
+    quantidade_total = sum([alimento.quantidade for alimento in alimentos])
+    custo_total = sum([alimento.valor * alimento.quantidade for alimento in alimentos])
 
+    # Calcular métricas por categoria e fornecedor
+    categoria_data = alimentos.values('categoria__nome').annotate(total=Sum('quantidade'))
+    fornecedor_data = alimentos.values('nome_fornecedor').annotate(total=Sum('quantidade'))
+
+    # Preparar listas para o contexto
+    categoria_labels = [data['categoria__nome'] for data in categoria_data]
+    categoria_totals = [data['total'] for data in categoria_data]
+
+    fornecedor_labels = [data['nome_fornecedor'] for data in fornecedor_data]
+    fornecedor_totals = [data['total'] for data in fornecedor_data]
+
+    # Contexto para o template
+    context = {
+        'categoria_labels': categoria_labels,
+        'categoria_totals': categoria_totals,
+        'fornecedor_labels': fornecedor_labels,
+        'fornecedor_totals': fornecedor_totals,
+        'quantidade_total': quantidade_total,
+        'custo_total': custo_total,
+    }
+
+    return render(request, 'financeiro/dashboard.html', context)
