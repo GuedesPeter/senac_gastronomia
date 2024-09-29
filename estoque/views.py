@@ -26,6 +26,11 @@ def categoria_create(request):
     return render(request, 'estoque/categoria_form.html', {'form': form})  # Renderiza um template específico para a criação
 
 
+from django.views.generic import ListView
+from django.db.models import Sum
+from django.utils import timezone
+from .models import Alimento, Categoria
+
 class AlimentoListView(ListView):
     model = Alimento
     template_name = 'estoque/estoque.html'
@@ -33,38 +38,39 @@ class AlimentoListView(ListView):
 
     def get_queryset(self):
         # Inicializa o queryset
-        queryset = Alimento.objects.none()  # Começa com um queryset vazio
-        
+        queryset = Alimento.objects.all()  # Começa com todos os alimentos
+
         # Filtros
         categoria_id = self.request.GET.get('categoria')
         if categoria_id:
-            queryset = Alimento.objects.filter(categoria_id=categoria_id).order_by('nome')
+            queryset = queryset.filter(categoria_id=categoria_id)
 
-            nome = self.request.GET.get('nome')
-            if nome:
-                queryset = queryset.filter(nome__icontains=nome)
+        # Outros filtros
+        nome = self.request.GET.get('nome')
+        if nome:
+            queryset = queryset.filter(nome__icontains=nome)
 
-            referencia = self.request.GET.get('referencia')
-            if referencia:
-                queryset = queryset.filter(referencia__icontains=referencia)
+        referencia = self.request.GET.get('referencia')
+        if referencia:
+            queryset = queryset.filter(referencia__icontains=referencia)
 
-            data_entrada = self.request.GET.get('data_entrada')
-            if data_entrada:
-                queryset = queryset.filter(data_entrada=data_entrada)
+        data_entrada = self.request.GET.get('data_entrada')
+        if data_entrada:
+            queryset = queryset.filter(data_entrada=data_entrada)
 
-            nro_nota = self.request.GET.get('nro_nota')
-            if nro_nota:
-                queryset = queryset.filter(nro_nota__icontains=nro_nota)
+        nro_nota = self.request.GET.get('nro_nota')
+        if nro_nota:
+            queryset = queryset.filter(nro_nota__icontains=nro_nota)
 
-            marca = self.request.GET.get('marca')
-            if marca:
-                queryset = queryset.filter(marca__icontains=marca)
+        marca = self.request.GET.get('marca')
+        if marca:
+            queryset = queryset.filter(marca__icontains=marca)
 
-            nome_fornecedor = self.request.GET.get('nome_fornecedor')
-            if nome_fornecedor:
-                queryset = queryset.filter(nome_fornecedor__icontains=nome_fornecedor)
+        nome_fornecedor = self.request.GET.get('nome_fornecedor')
+        if nome_fornecedor:
+            queryset = queryset.filter(nome_fornecedor__icontains=nome_fornecedor)
 
-        return queryset
+        return queryset.order_by('nome')  # Ordena por nome
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -84,7 +90,11 @@ class AlimentoListView(ListView):
             context['valor_total_categoria'] = 0
             context['categoria_atual'] = "Nenhuma Categoria Selecionada"  # Indica que nenhuma categoria foi escolhida
 
+        # Preparando dados para o gráfico de pizza
+        context['categorias_valor'] = Alimento.objects.values('categoria__nome').annotate(total=Sum('valor')).order_by('categoria__nome')
+
         return context
+
 
     
 class AlimentoCreateView(CreateView):
