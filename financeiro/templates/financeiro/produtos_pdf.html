@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Financeiro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .metrics {
+            display: flex;
+            justify-content: center; /* Centraliza as caixas de métricas */
+            margin-bottom: 20px;
+        }
+        .metric {
+            text-align: center; /* Centraliza o conteúdo da caixa */
+            width: 45%; 
+            margin: 0 10px;
+        }
+        
+        .metric h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .metric p {
+            font-size: 24px;
+            margin: 5px 0 0;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .no-results {
+            text-align: center;
+            font-size: 16px;
+            color: #888;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="fw-bold">Relatório Financeiro</h1>
+
+    <div class="metrics">
+        <div class="metric">
+            <h2>Quantidade Total de Produtos</h2>
+            <p>{{ quantidade_total }}</p>
+        </div>
+        <div class="metric">
+            <h2>Custo Total do Estoque</h2>
+            <p>R$ {{ custo_total }}</p>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Peso</th>
+                <th>Referência</th>
+                <th>Categoria</th>
+                <th>Validade</th>
+                <th>Valor</th>
+                <th>Data de Entrada</th>
+                <th>Número da Nota</th>
+                <th>Fornecedor</th>
+                <th>Marca</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alimento in alimentos %}
+            <tr>
+                <td>{{ alimento.nome }}</td>
+                <td>{{ alimento.quantidade }}</td>
+                <td>{{ alimento.peso }}</td>
+                <td>{{ alimento.referencia }}</td>
+                <td>{{ alimento.categoria.nome }}</td>
+                <td>{{ alimento.validade|date:"d/m/Y" }}</td>
+                <td>R$ {{ alimento.valor }}</td>
+                <td>{{ alimento.data_entrada|date:"d/m/Y" }}</td>
+                <td>{{ alimento.nro_nota }}</td>
+                <td>{{ alimento.nome_fornecedor }}</td>
+                <td>{{ alimento.marca }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="11" class="no-results">Nenhum alimento encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

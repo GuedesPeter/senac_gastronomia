@@ -34,7 +34,8 @@
             <div class="d-flex gap-2 mb-2">
                 <button type="submit" class="btn btn-primary">Filtrar</button>
                 <a href="{% url 'financeiro' %}" class="btn btn-secondary">Limpar Filtros</a>
-                <a href="#" class="btn btn-info">Gerar Relatório PDF</a>
+                <a href="{% url 'gerar_pdf' %}?categoria={{ categoria }}&validade={{ validade }}&data_entrada={{ data_entrada }}&fornecedor={{ fornecedor }}&marca={{ marca }}" class="btn btn-info">Gerar Relatório PDF</a>
+
             </div>
             
         </form>
