@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from django.template.loader import get_template
@@ -69,9 +68,6 @@ def financeiro(request):
     }
 
     return render(request, 'financeiro/financeiro.html', context)
-
-
-
 def gerar_pdf(request):
     # Obter os parâmetros de filtragem e ordenação da URL
     categoria = request.GET.get('categoria', '')
@@ -141,13 +137,9 @@ def gerar_pdf(request):
         return HttpResponse('Erro ao gerar PDF', status=500)
     
     return response
-
-
 # DASHBOARD VIEW
 def dashboard(request):
     alimentos = Alimento.objects.all()
-
-
     # Calcular totais
     quantidade_total = sum([alimento.quantidade for alimento in alimentos])
     custo_total = sum([alimento.valor * alimento.quantidade for alimento in alimentos])

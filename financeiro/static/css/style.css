@@ -241,3 +241,19 @@ tr:hover {
     background-size: cover;
     
 }
+
+
+/* CSS DASHBOARD */
+.chart-container {
+    display: flex;             /* Utiliza o modelo de layout flexível */
+    flex-wrap: wrap;          /* Permite que os gráficos que não cabem em uma linha passem para a próxima */
+    justify-content: space-between; /* Distribui o espaço entre os gráficos */
+    margin-top: 10px;         /* Define a distância entre as linhas de gráficos */
+}
+
+.chart-item {
+    width: 45%;               /* Define a largura dos gráficos como 45% da div pai */
+    max-width: 400px;         /* Define a largura máxima dos gráficos como 400px */
+    margin: 0px;              /* Ajuste aqui: reduzido para 2px para diminuir o espaçamento */
+}
+
