@@ -11,18 +11,12 @@
   background-size: cover;
 }
 
-.home-bg {
-  height: 100vh; /* Ocupa 100% da altura da tela */
-  width: 100vw;  /* Ocupa 100% da largura da tela */
-  background: 
-      url(/static/img/bg2.jpg) no-repeat center center;
-  background-size: cover;
-}
+
 
 .menu {
-  background: 
+  /* background: 
       url(/static/img/home_bgmenu.jpg) no-repeat center center;
-  background-size: cover;
+  background-size: cover; */
 }
 
 .carousel-img {
