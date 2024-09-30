@@ -1,14 +1,7 @@
-# Create your views here.
 
-<<<<<<< HEAD
-
-# def financeiro(request):
-#     return render(request, 'financeiro/financeiro.html')  
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from django.template.loader import get_template
-=======
->>>>>>> 511debd2956f28d34db39f8470da5fce68b4b2a7
 from django.shortcuts import render
 from estoque.models import Alimento
 from datetime import datetime
@@ -78,7 +71,7 @@ def financeiro(request):
     return render(request, 'financeiro/financeiro.html', context)
 
 
-<<<<<<< HEAD
+
 def gerar_pdf(request):
     # Obter os parâmetros de filtragem e ordenação da URL
     categoria = request.GET.get('categoria', '')
@@ -148,12 +141,12 @@ def gerar_pdf(request):
         return HttpResponse('Erro ao gerar PDF', status=500)
     
     return response
-=======
+
 
 # DASHBOARD VIEW
 def dashboard(request):
     alimentos = Alimento.objects.all()
->>>>>>> 511debd2956f28d34db39f8470da5fce68b4b2a7
+
 
     # Calcular totais
     quantidade_total = sum([alimento.quantidade for alimento in alimentos])
