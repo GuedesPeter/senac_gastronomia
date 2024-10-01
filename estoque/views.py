@@ -77,11 +77,14 @@ class AlimentoListView(ListView):
         if categoria_id:
             context['valor_total_categoria'] = Alimento.objects.filter(categoria_id=categoria_id).aggregate(Sum('valor'))['valor__sum'] or 0
             context['categoria_atual'] = Categoria.objects.get(id=categoria_id).nome  # Adiciona o nome da categoria atual
+            context['categoria_selecionada'] = categoria_id  # Passa a categoria selecionada para o template
         else:
             context['valor_total_categoria'] = 0
             context['categoria_atual'] = "Nenhuma Categoria Selecionada"  # Indica que nenhuma categoria foi escolhida
+            context['categoria_selecionada'] = None  # Nenhuma categoria foi selecionada
 
         return context
+
 
 
 class AlimentoCreateView(CreateView):
