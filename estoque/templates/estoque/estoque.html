@@ -1,4 +1,5 @@
 {% extends 'base_estoque.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container-fluid">
@@ -20,16 +21,12 @@
                     <button class="btn btn-outline-danger mb-2" onclick="location.href='#'">
                         <i class="bi bi-box-seam"></i> Itens Vencidos
                     </button>
-                    
                 </div>
             </div>
         </nav>
 
         <!-- Main content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <!-- Navbar -->
-            
-
             <!-- Dashboard Cards -->
             <div class="row mb-4 justify-content-center">
                 <div class="col-md-3">
@@ -119,7 +116,7 @@
                             <td>{{ alimento.quantidade }}</td>
                             <td>{{ alimento.peso }}</td>
                             <td>{{ alimento.validade }}</td>
-                            <td>{{ alimento.valor }}</td>
+                            <td>R$ {{ alimento.valor|floatformat:2 }}</td>
                             <td>{{ alimento.data_entrada }}</td>
                             <td>{{ alimento.nro_nota }}</td>
                             <td>{{ alimento.nome_fornecedor }}</td>
@@ -163,8 +160,6 @@
                     </div>
                 </div>
             </div>
-            
-
 
             <!-- Modal de Utilização -->
             {% for alimento in alimentos %}
@@ -216,9 +211,6 @@
                 </div>
             </div>
             {% endfor %}
-
-
-
         </main>
     </div>
 </div>
