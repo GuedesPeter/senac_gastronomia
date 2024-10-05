@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Estilos gerais */
 body {
   background-color: #1e1e2f;
@@ -6,6 +7,73 @@ body {
 }
 
 .container-fluid {
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Garantir que o padding seja incluído na largura/altura total */
+}
+
+/* Estilo geral para a home */
+.home {
+  height: 100vh; /* Ocupa 100% da altura da tela */
+  width: 100vw;  /* Ocupa 100% da largura da tela */
+  background: url(/static/img/home_bg1.jpg) no-repeat center center;
+  background-size: cover;
+  display: flex;  /* Flex para facilitar o alinhamento */
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Menu */
+.menu {
+  /* Você pode descomentar e personalizar conforme necessário */
+  /* background: url(/static/img/home_bgmenu.jpg) no-repeat center center; */
+  /* background-size: cover; */
+}
+
+/* Imagem do carousel */
+.carousel-img {
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Sidebar */
+.sidebar {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  height: 100vh;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar h4 {
+  margin-bottom: 20px;
+}
+
+.sidebar .nav {
+  flex-direction: column;
+}
+
+.sidebar .btn {
+  width: 100%;
+  padding: 15px;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Conteúdo principal */
+.main-content {
+>>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
   padding: 20px;
 }
 
@@ -18,6 +86,7 @@ h4 {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+<<<<<<< HEAD
 .card-title {
   font-size: 1.1rem;
 }
@@ -203,4 +272,64 @@ form .btn-outline-primary:hover {
 #piechart {
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
+=======
+/* Tabela */
+.table th, .table td {
+  vertical-align: middle;
+}
+
+/* Modal */
+.modal-content {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+.modal-header, .modal-footer {
+  border: none;
+}
+
+.text-white {
+  color: #ffffff !important;
+}
+
+.bg-translucido {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 250px; /* Ajuste o tamanho da sidebar */
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column; /* Alinha os elementos em coluna em telas pequenas */
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%; /* Sidebar ocupa 100% da largura */
+    height: auto;
+  }
+
+  .sidebar .btn {
+    padding: 10px; /* Botões menores em telas pequenas */
+  }
+}
+
+@media (max-width: 576px) {
+  .home {
+    padding: 5px; /* Reduz o padding para telas muito pequenas */
+  }
+
+  .sidebar {
+    padding: 10px;
+  }
+
+  .carousel-img {
+    width: 100%; /* Imagens ocupam 100% da largura em dispositivos menores */
+  }
+>>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
 }
