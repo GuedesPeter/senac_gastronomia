@@ -1,11 +1,20 @@
 /* Estilo escolha */
-.container mt-5 {
+.container.mt-5 {
   height: 100vh; /* Ocupa 100% da altura da tela */
   width: 100vw;  /* Ocupa 100% da largura da tela */
-  background: 
-    url(/static/img/home_bg1.jpg) no-repeat center center;
-  background-size: cover;
+  
+  /* Configura a imagem de fundo */
+  background-image: url('/static/img/bg2.jpg');
+  background-size: cover; /* Faz com que a imagem cubra toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat;
+
+  /* Adiciona uma camada de cor com transparência */
+  background-color: rgba(0, 0, 0, 0.3); /* Preto com 50% de opacidade */
+  background-blend-mode: overlay; /* Mistura a cor e a imagem */
 }
+
+
 a {
     text-decoration: none;
   } 

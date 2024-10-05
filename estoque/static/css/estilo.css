@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+/* Estilos gerais */
+body {
+  background-color: #1e1e2f;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+}
+
+.container-fluid {
+=======
 * {
   margin: 0;
   padding: 0;
@@ -63,14 +73,206 @@
 
 /* Conteúdo principal */
 .main-content {
+>>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
   padding: 20px;
 }
 
-/* Cards */
-.card {
-  margin-bottom: 20px;
+h4 {
+  font-weight: bold;
 }
 
+.card {
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+<<<<<<< HEAD
+.card-title {
+  font-size: 1.1rem;
+}
+
+.card-text {
+  font-size: 1.5rem;
+}
+
+/* Sidebar */
+#sidebar {
+  padding: 20px;
+  min-height: 100vh;
+}
+
+#sidebar h4 {
+  font-size: 1.3rem;
+}
+
+#sidebar .btn {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#sidebar .btn-outline-primary {
+  border: 2px solid #007bff;
+  background: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+
+#sidebar .btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+#sidebar .btn-outline-danger {
+  border: 2px solid #dc3545;
+  background: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+
+#sidebar .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+/* Dashboard Cards */
+.card-title {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8f9fa;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.border-primary {
+  border-color: #007bff !important;
+}
+
+.card.border-success {
+  border-color: #28a745 !important;
+}
+
+.card.border-danger {
+  border-color: #dc3545 !important;
+}
+
+/* Tabela de Estoque */
+.table-responsive {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.table thead th {
+  background-color: #343a40;
+  border: none;
+  text-transform: uppercase;
+}
+
+.table tbody td {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Botões de Ação */
+.table tbody .btn-outline-warning {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.table tbody .btn-outline-warning:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.table tbody .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.table tbody .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.table tbody .btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.table tbody .btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* Modal */
+.modal-content {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+}
+
+.modal-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.modal-footer .btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.modal-footer .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.modal-footer .btn-outline-success {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.modal-footer .btn-outline-success:hover {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Formulários de Filtro */
+form input, form select {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  color: #000;
+  font-weight: bold;
+  border: none;
+}
+
+form .btn-outline-primary {
+  border: 2px solid #007bff;
+  background: transparent;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+form .btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+/* Estilo do gráfico */
+#piechart {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+=======
 /* Tabela */
 .table th, .table td {
   vertical-align: middle;
@@ -129,4 +331,5 @@
   .carousel-img {
     width: 100%; /* Imagens ocupam 100% da largura em dispositivos menores */
   }
+>>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
 }
