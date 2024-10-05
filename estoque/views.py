@@ -14,7 +14,6 @@ from .models import Alimento, Entrada, Saida, Categoria  # Certifique-se que os 
 from .forms import AlimentoForm, CategoriaForm  # Certifique-se que os forms estão definidos
 
 
-
 def deslogar_view(request):
     logout(request)  # Desloga o usuário
     return redirect('sigin')  # Redireciona para a página de login (ou qualquer outra página)
