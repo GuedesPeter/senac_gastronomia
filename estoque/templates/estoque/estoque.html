@@ -1,4 +1,5 @@
 {% extends 'base_estoque.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container-fluid">
@@ -6,7 +7,7 @@
         <!-- Sidebar -->
         <nav id="sidebar" class="col-md-2 d-md-block" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px;">
             <div class="position-sticky">
-                <h4 class="text-light text-center mt-3 p-2">Gestão de Estoque</h4>
+                <h4 class="text-light text-center mt-3 p-2 fw-bold">Gestão de Estoque</h4>
                 <div class="nav flex-column">
                     <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#addCategoriaModal">
                         <i class="bi bi-tag-fill"></i> Adicionar Categorias
@@ -20,16 +21,18 @@
                     <button class="btn btn-outline-danger mb-2" onclick="location.href='#'">
                         <i class="bi bi-box-seam"></i> Itens Vencidos
                     </button>
-                    
+                    <button class="btn btn-outline-info mb-2" onclick="location.href='{% url 'financeiro' %}'">
+                        <i class="bi bi-currency-dollar"></i> Financeiro
+                    </button>
+                    <button class="btn btn-outline-secondary mb-2" onclick="location.href='{% url 'deslogar' %}'">
+                        <i class="bi bi-door-open"></i> Sair da Aplicação
+                    </button>
                 </div>
             </div>
         </nav>
 
         <!-- Main content -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <!-- Navbar -->
-            
-
             <!-- Dashboard Cards -->
             <div class="row mb-4 justify-content-center">
                 <div class="col-md-3">
@@ -58,6 +61,35 @@
                 </div>
             </div>
 
+<<<<<<< HEAD
+            <!-- Gráfico de Pizza
+            <div id="piechart" style="width: 100%; height: 500px; margin-bottom: 20px;"></div> -->
+
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Categoria', 'Total'],
+                        {% for categoria in categorias_valor %}
+                        ['{{ categoria.categoria__nome }}', {{ categoria.total }}],
+                        {% endfor %}
+                    ]);
+
+                    var options = {
+                        title: 'Total de Alimentos por Categoria',
+                        is3D: true,
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            </script>
+
+=======
+>>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
             <!-- Filtros -->
             <div class="mb-4" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px; padding: 15px;">
                 <form method="get">
@@ -119,7 +151,7 @@
                             <td>{{ alimento.quantidade }}</td>
                             <td>{{ alimento.peso }}</td>
                             <td>{{ alimento.validade }}</td>
-                            <td>{{ alimento.valor }}</td>
+                            <td>R$ {{ alimento.valor|floatformat:2 }}</td>
                             <td>{{ alimento.data_entrada }}</td>
                             <td>{{ alimento.nro_nota }}</td>
                             <td>{{ alimento.nome_fornecedor }}</td>
@@ -163,8 +195,6 @@
                     </div>
                 </div>
             </div>
-            
-
 
             <!-- Modal de Utilização -->
             {% for alimento in alimentos %}
@@ -216,9 +246,6 @@
                 </div>
             </div>
             {% endfor %}
-
-
-
         </main>
     </div>
 </div>

@@ -15,32 +15,51 @@ body {
 .home {
     height: 100vh; /* Ocupa 100% da altura da tela */
     width: 100vw;  /* Ocupa 100% da largura da tela */
-    background: 
+    background:  
         url(/static/img/home_bg1.jpg) no-repeat center center;
+    
     background-size: cover;
 }
 
 
-.home-bg {
+ .home-bg {
   height: 100vh; /* Ocupa 100% da altura da tela */
   width: 100vw;  /* Ocupa 100% da largura da tela */
-  background: 
-      url(/static/img/bg2.jpg) no-repeat center center;
-  background-size: cover;
-}
-
   
+  /* Configura a imagem de fundo */
+  background-image: url('/static/img/bg2.jpg');
+  background-size: cover; /* Faz com que a imagem cubra toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat;
+
+  /* Adiciona uma camada de cor com transparência */
+  background-color: rgba(0, 0, 0, 0.3); /* Preto com 50% de opacidade */
+  background-blend-mode: overlay; /* Mistura a cor e a imagem */
+} 
+
+.logo {
+
+   margin: auto;
+   height: 200px;
+  
+  }
+  
+  img, svg {
+    vertical-align: middle;
+    height: 200px;
+  
+  } 
 .menu {
-    background: 
+    /* background: 
         url(/static/img/home_bgmenu.jpg) no-repeat center center;
-    background-size: cover;
+    background-size: cover; */
 }
 
-/* Estilo do container principal */
+
 .container {
   max-width: 100%;
-  padding: 20px;
-}
+  /* padding: 20px; */
+} 
 
 /* Estilo do formulário de login */
 .card {
@@ -90,7 +109,9 @@ body {
   font-size: 1rem; /* Tamanho da fonte */
   margin-bottom: 15px; /* Espaço abaixo do campo */
 }
-
+.logo{
+  margin: auto;
+}
 /* Estilo do botão */
 .btn-primary {
   background-color: #007bff; /* Cor de fundo azul */
@@ -105,7 +126,7 @@ body {
 .btn-primary:hover {
   background-color: #0056b3; /* Cor de fundo mais escura ao passar o mouse */
 }
-
+.nav-item
 
 
 

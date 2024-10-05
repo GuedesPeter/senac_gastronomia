@@ -1,17 +1,26 @@
+from decimal import Decimal
+from django.contrib import messages
+from django.contrib.auth import logout
+from django.db.models import Sum
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está instalada
+
 from .models import Alimento, Entrada, Saida, Categoria  # Certifique-se que os modelos estão definidos corretamente
 from .forms import AlimentoForm, CategoriaForm  # Certifique-se que os forms estão definidos
-from decimal import Decimal
-from django.utils import timezone
-from django.contrib import messages
-from django.template.loader import render_to_string
-from django.http import HttpResponse # Import necessário para gerar a resposta PDF
-from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está instalada
-from django.db.models import Sum
 
 
+def deslogar_view(request):
+    logout(request)  # Desloga o usuário
+    return redirect('sigin')  # Redireciona para a página de login (ou qualquer outra página)
+
+def financeiro_view(request):
+    # Adicione qualquer lógica que precisar aqui
+    return render(request, 'financeiro.html')  # Isso vai renderizar o template financeiro.html
 
 def categoria_create(request):
     if request.method == 'POST':
@@ -32,61 +41,61 @@ class AlimentoListView(ListView):
     context_object_name = 'alimentos'
 
     def get_queryset(self):
-        # Inicializa o queryset
-        queryset = Alimento.objects.none()  # Começa com um queryset vazio
-        
+        queryset = Alimento.objects.all()  # Começa com todos os alimentos
+
         # Filtros
         categoria_id = self.request.GET.get('categoria')
         if categoria_id:
-            queryset = Alimento.objects.filter(categoria_id=categoria_id).order_by('nome')
+            queryset = queryset.filter(categoria_id=categoria_id)
 
-            nome = self.request.GET.get('nome')
-            if nome:
-                queryset = queryset.filter(nome__icontains=nome)
+        nome = self.request.GET.get('nome')
+        if nome:
+            queryset = queryset.filter(nome__icontains=nome)
 
-            referencia = self.request.GET.get('referencia')
-            if referencia:
-                queryset = queryset.filter(referencia__icontains=referencia)
+        referencia = self.request.GET.get('referencia')
+        if referencia:
+            queryset = queryset.filter(referencia__icontains=referencia)
 
-            data_entrada = self.request.GET.get('data_entrada')
-            if data_entrada:
-                queryset = queryset.filter(data_entrada=data_entrada)
+        data_entrada = self.request.GET.get('data_entrada')
+        if data_entrada:
+            queryset = queryset.filter(data_entrada=data_entrada)
 
-            nro_nota = self.request.GET.get('nro_nota')
-            if nro_nota:
-                queryset = queryset.filter(nro_nota__icontains=nro_nota)
+        nro_nota = self.request.GET.get('nro_nota')
+        if nro_nota:
+            queryset = queryset.filter(nro_nota__icontains=nro_nota)
 
-            marca = self.request.GET.get('marca')
-            if marca:
-                queryset = queryset.filter(marca__icontains=marca)
+        marca = self.request.GET.get('marca')
+        if marca:
+            queryset = queryset.filter(marca__icontains=marca)
 
-            nome_fornecedor = self.request.GET.get('nome_fornecedor')
-            if nome_fornecedor:
-                queryset = queryset.filter(nome_fornecedor__icontains=nome_fornecedor)
+        nome_fornecedor = self.request.GET.get('nome_fornecedor')
+        if nome_fornecedor:
+            queryset = queryset.filter(nome_fornecedor__icontains=nome_fornecedor)
 
-        return queryset
+        return queryset.order_by('nome')  # Ordena por nome
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # Adicionando dados ao contexto
         now = timezone.now().date()
         context['alimentos_vencidos'] = Alimento.objects.filter(validade__lt=now)
         context['categorias'] = Categoria.objects.all()  # Passa todas as categorias
         context['now'] = now  # Passa a data atual
-        
+
         # Calculando o valor total por categoria
         categoria_id = self.request.GET.get('categoria')
         if categoria_id:
             context['valor_total_categoria'] = Alimento.objects.filter(categoria_id=categoria_id).aggregate(Sum('valor'))['valor__sum'] or 0
             context['categoria_atual'] = Categoria.objects.get(id=categoria_id).nome  # Adiciona o nome da categoria atual
+            context['categoria_selecionada'] = categoria_id  # Passa a categoria selecionada para o template
         else:
             context['valor_total_categoria'] = 0
             context['categoria_atual'] = "Nenhuma Categoria Selecionada"  # Indica que nenhuma categoria foi escolhida
+            context['categoria_selecionada'] = None  # Nenhuma categoria foi selecionada
 
         return context
 
-    
+
+
 class AlimentoCreateView(CreateView):
     model = Alimento
     form_class = AlimentoForm
@@ -123,9 +132,9 @@ class AlimentoCreateView(CreateView):
 
             # Registra a entrada do alimento existente
             entrada = Entrada(
-                alimento=alimento_existente, 
-                quantidade=quantidade, 
-                peso=peso, 
+                alimento=alimento_existente,
+                quantidade=quantidade,
+                peso=peso,
                 validade=validade
             )
             entrada.save()
@@ -141,9 +150,9 @@ class AlimentoCreateView(CreateView):
 
             # Registra a entrada do novo alimento
             entrada = Entrada(
-                alimento=alimento, 
-                quantidade=quantidade, 
-                peso=peso, 
+                alimento=alimento,
+                quantidade=quantidade,
+                peso=peso,
                 validade=validade
             )
             entrada.save()
@@ -167,9 +176,9 @@ class AlimentoUpdateView(UpdateView):
         # Se a quantidade ou peso forem alterados, registrar a entrada
         if quantidade_atualizada > 0 or peso_atualizado > 0:
             entrada = Entrada(
-                alimento=alimento, 
-                quantidade=quantidade_atualizada, 
-                peso=peso_atualizado, 
+                alimento=alimento,
+                quantidade=quantidade_atualizada,
+                peso=peso_atualizado,
                 validade=alimento.validade  # Pode ajustar conforme necessário
             )
             entrada.save()
@@ -180,7 +189,6 @@ class AlimentoUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()  # Supondo que você tenha um modelo Categoria
         return context
-
 
 
 class UtilizarAlimentoView(View):
@@ -203,9 +211,9 @@ class UtilizarAlimentoView(View):
 
             # Registra a saída do alimento utilizado
             saida = Saida(
-                alimento=alimento, 
-                quantidade=quantidade_utilizada, 
-                peso=peso_utilizado, 
+                alimento=alimento,
+                quantidade=quantidade_utilizada,
+                peso=peso_utilizado,
                 validade=alimento.validade  # Ajuste conforme necessário
             )
             saida.save()
@@ -219,7 +227,6 @@ class AlimentoDeleteView(DeleteView):
     success_url = reverse_lazy('alimento_list')
 
 
-
 class EntradasListView(ListView):
     model = Entrada
     template_name = 'estoque/entradas_list.html'  # Crie este template
@@ -228,6 +235,7 @@ class EntradasListView(ListView):
     def get_queryset(self):
         return Entrada.objects.all().order_by('-validade')
 
+
 class SaidasListView(ListView):
     model = Saida
     template_name = 'estoque/saidas_list.html'  # Crie este template
@@ -235,6 +243,7 @@ class SaidasListView(ListView):
 
     def get_queryset(self):
         return Saida.objects.all().order_by('-validade')
+
 
 class EntradasPDFView(View):
     def get(self, request, *args, **kwargs):
@@ -255,6 +264,7 @@ class EntradasPDFView(View):
             return HttpResponse('Erro ao gerar PDF.')
 
         return response
+
 
 class SaidasPDFView(View):
     def get(self, request, *args, **kwargs):

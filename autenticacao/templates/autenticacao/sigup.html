@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 <br>
 <br>
 {% block content%}
 
     <main class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-5">    
-                
+            <div class="col-md-5"> 
+
                 <form method="POST" class="card card-body">
                     {% csrf_token %}
+                    <div class="logo">
+                        <img src="{% static 'img/logo_sg.png' %}" alt="logo">
+                    </div>
                     <h1 class="text-center"> Cadastre-se</h1> 
     
                     {% if error_message %}
@@ -20,7 +24,6 @@
                     <div class="mb-3">
                         <label for="username" class="form-label">Nome</label>
                         <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username">
-                        <!-- <div id="emailHelp" class="form-text">Nós nunca compartilharemos seu e-mail com ninguém.</div> -->
                     </div>
     
                     <div class="mb-3">
@@ -33,12 +36,12 @@
                         <input type="password" class="form-control" id="password2" name="password2">
                     </div>
     
-                    <!-- <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Lembre de mim</label>
-                    </div> -->
-    
-                    <button type="submit" class="btn btn-primary">ENVIAR</button>
+                    <!-- Colocar os botões lado a lado -->
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'sigin' %}" class="btn btn-outline-secondary">Voltar</a>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>
