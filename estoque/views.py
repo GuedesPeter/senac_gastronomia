@@ -11,7 +11,7 @@ from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está 
 
 from .models import Alimento, Entrada, Saida, Categoria  # Certifique-se que os modelos estão definidos corretamente
 from .forms import AlimentoForm, CategoriaForm  # Certifique-se que os forms estão definidos
-<<<<<<< HEAD
+
 from decimal import Decimal
 from django.utils import timezone
 from django.contrib import messages
@@ -21,8 +21,7 @@ from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está 
 from django.db.models import Sum
 from django.contrib.auth import logout
 
-=======
->>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
+
 
 def deslogar_view(request):
     logout(request)  # Desloga o usuário
