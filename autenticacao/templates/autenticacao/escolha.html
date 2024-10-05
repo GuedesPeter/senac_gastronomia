@@ -6,26 +6,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static './css/escolha.css' %}">
 
+    
+    
+
     <div class="card-group">
-        <div class="card1">
-          <a href="{% url 'alimento_list' %}" >  <!-- URL para a lista de alimentos -->
-            <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
-            <div class="card-body">
-              <h5>GESTÃO DE ESTOQUE</h5>
-              <p class="card-text">Controle inteligente, estoque eficiente.</p>
-            </div>
-          </a>
-        </div>
-        
-        <div class="card2">
-          <a href="{% url 'financeiro' %}">  <!-- Certifique-se de que essa URL está definida  -->
-            <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
-            <div class="card-body">
-              <h5>GESTÃO FINANCEIRA</h5>
-              <p class="card-text">Controle o presente, construa o futuro.</p>
-            </div>
-          </a>
-        </div>
-    </div>
+      <div class="card1 card" style="width: 20rem;"> <!-- Ajuste de largura -->
+        <a href="{% url 'alimento_list' %}">
+          <img src="{% static 'img/slide1.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão de Estoque">
+          <div class="card-body">
+            <h5>GESTÃO DE ESTOQUE</h5>
+            <p class="card-text">Controle inteligente, estoque eficiente.</p>
+          </div>
+        </a>
+      </div>
+      
+      <div class="card2 card" style="width: 20rem;"> <!-- Ajuste de largura -->
+        <a href="{% url 'financeiro' %}">
+          <img src="{% static 'img/slide2.jpg' %}" class="d-block w-100 carousel-img" alt="Gestão Financeira">
+          <div class="card-body">
+            <h5>GESTÃO FINANCEIRA</h5>
+            <p class="card-text">Controle o presente, construa o futuro.</p>
+          </div>
+        </a>
+      </div>
+  </div>
+<!-- Botão de Sair -->
+    <div class="logout-button  mb-4">
+      <form method="POST" action="{% url 'exit' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-lg">Sair</button>
+      </form>
+  </div>
 </main>
 {% endblock %}
+

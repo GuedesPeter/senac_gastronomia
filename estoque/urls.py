@@ -15,6 +15,8 @@ from .views import (
     SaidasListView,    
     EntradasPDFView,   
     SaidasPDFView,
+    deslogar_view,
+    financeiro_view,
     categoria_create,  # Importando a nova view para criar categorias
     
 )
@@ -30,5 +32,7 @@ urlpatterns = [
     path('entradas/pdf/', EntradasPDFView.as_view(), name='entradas_pdf'),  # Gerar PDF de entradas
     path('saidas/pdf/', SaidasPDFView.as_view(), name='saidas_pdf'),  # Gerar PDF de saídas
     path('categoria/criar/', categoria_create, name='categoria_create'),  # Adicionar nova categoria
+    path('financeiro/', financeiro_view, name='financeiro'),
+    path('deslogar/', deslogar_view, name='deslogar')
     
 ]

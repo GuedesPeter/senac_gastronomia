@@ -10,8 +10,16 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse # Import necessário para gerar a resposta PDF
 from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está instalada
 from django.db.models import Sum
+from django.contrib.auth import logout
 
 
+def deslogar_view(request):
+    logout(request)  # Desloga o usuário
+    return redirect('sigin')  # Redireciona para a página de login (ou qualquer outra página)
+
+def financeiro_view(request):
+    # Adicione qualquer lógica que precisar aqui
+    return render(request, 'financeiro.html')  # Isso vai renderizar o template financeiro.html
 
 def categoria_create(request):
     if request.method == 'POST':
