@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 <br>
 <br>
 {% block content%}
@@ -9,6 +10,9 @@
 
                 <form method="POST" class="card card-body">
                     {% csrf_token %}
+                    <div class="logo">
+                        <img src="{% static 'img/logo_sg.png' %}" alt="logo">
+                    </div>
                     <h1 class="text-center"> Cadastre-se</h1> 
     
                     {% if error_message %}
