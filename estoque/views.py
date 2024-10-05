@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -11,18 +12,8 @@ from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está 
 
 from .models import Alimento, Entrada, Saida, Categoria  # Certifique-se que os modelos estão definidos corretamente
 from .forms import AlimentoForm, CategoriaForm  # Certifique-se que os forms estão definidos
-<<<<<<< HEAD
-from decimal import Decimal
-from django.utils import timezone
-from django.contrib import messages
-from django.template.loader import render_to_string
-from django.http import HttpResponse # Import necessário para gerar a resposta PDF
-from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está instalada
-from django.db.models import Sum
-from django.contrib.auth import logout
 
-=======
->>>>>>> 889421db7c89e8e9fb224a8f256c7443c4bbd038
+
 
 def deslogar_view(request):
     logout(request)  # Desloga o usuário
