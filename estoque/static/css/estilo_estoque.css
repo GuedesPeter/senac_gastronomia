@@ -7,8 +7,10 @@
 /* Estilo geral da página */
 body {
   font-family: 'Nunito', sans-serif;
-  background-color: #f8f9fa;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo preto translúcido */
+  color: #f8f9fa; /* Para garantir que o texto tenha contraste suficiente */
 }
+
 
 .home, .home-bg {
   height: 100vh;
@@ -16,7 +18,7 @@ body {
 }
 
 .home {
-  background: url(/static/img/home_bg1.jpg) no-repeat center center;
+  background: url(/static/img/home_bg.jpg) no-repeat center center;
   background-size: cover;
 }
 
@@ -25,7 +27,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
   background-blend-mode: overlay;
 }
 
@@ -46,6 +48,14 @@ img, svg {
   */
 }
 
+
+.nav{
+  background: rgba(0, 0, 0, 0.7); 
+  border-radius: 15px;
+  justify-content: center;
+}
+
+
 .container {
   max-width: 100%;
 }
@@ -53,7 +63,7 @@ img, svg {
 /* Estilo do formulário de login */
 .card {
   text-align: left;
-  background-color: #ffffff;
+  background-color: #000000c7;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -106,7 +116,7 @@ img, svg {
   border-radius: 5px;
   color: #ffffff;
   font-size: 1rem;
-  padding: 10px;
+  padding: 1px;
   transition: background-color 0.3s ease;
 }
 
@@ -116,10 +126,10 @@ img, svg {
 
 /* Sidebar */
 .sidebar {
-  background: rgba(0, 0, 0, 0.7);
+  /* background: rgba(0, 0, 0, 0.7); */
   border-radius: 15px;
   height: 100vh;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -137,11 +147,13 @@ img, svg {
   color: #fff;
   border-radius: 5px;
   margin-bottom: 10px;
+  background-color: transparent; /* Remover fundo preto */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Adiciona borda transparente para melhor visibilidade */
   transition: background-color 0.3s ease;
 }
 
 .sidebar .btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2); /* Mantenha a mudança de cor no hover */
 }
 
 /* Conteúdo principal */
@@ -336,5 +348,81 @@ form .btn-outline-primary:hover {
 
   .carousel-img {
     width: 100%;
+  }
+}
+
+/* Styles para login e cadastro */
+.container-home {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-card {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-card .card-header {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+#forgot-password {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.toggle-btn:hover {
+  color: #0056b3;
+}
+
+.sign-in {
+  animation: slide-in 0.3s forwards;
+}
+
+.sign-up {
+  animation: slide-out 0.3s forwards;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
   }
 }
