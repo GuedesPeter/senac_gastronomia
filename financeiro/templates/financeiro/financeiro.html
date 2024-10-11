@@ -36,7 +36,7 @@
                 <a href="{% url 'financeiro' %}" class="btn btn-secondary">Limpar Filtros</a>
                 <a href="{% url 'gerar_pdf' %}?categoria={{ categoria }}&validade={{ validade }}&data_entrada={{ data_entrada }}&fornecedor={{ fornecedor }}&marca={{ marca }}" class="btn btn-info">Gerar Relatório PDF</a>
                 <a href="{% url 'dashboard' %}" class="btn btn-info">Dashboard</a>
-                <a href="#" class="btn btn-info">Lista de Compras</a>
+                <a href="{% url 'alimento_list' %}" class="btn btn-info">Estoque</a>
             </div>
         </form>
     </div>

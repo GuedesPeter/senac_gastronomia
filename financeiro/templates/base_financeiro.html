@@ -15,7 +15,7 @@
     <nav class="navbar navbar-dark bg-light menu">
         <div class="container">
           <a class="navbar-brand fw-bold" href="/">
-            <img src="{% static 'img/logo_sg.png' %}" alt="logo">
+            {% comment %} <img src="{% static 'img/logo_sg.png' %}" alt="logo"> {% endcomment %}
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,15 +31,6 @@
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'escolha' %}">Escolha</a>
                     </li>
-                    {% comment %} <li class="nav-item">
-                      <a class="nav-link" href="{% url 'entradas_list' %}">Entradas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'saidas_list' %}">Saídas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'features' %}">Features Futuras</a>
-                    </li> {% endcomment %}
                     <form action="{% url 'exit' %}" method="post">
                       {% csrf_token %}
                       <button type="submit" class="nav-link btn btn-link text-light">Sair</button>
@@ -61,7 +52,7 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
+    {% comment %} <div class="container mt-5">
       
         <!-- Exibir mensagens -->
         {% if messages %}
@@ -72,7 +63,7 @@
                     </div>
                 {% endfor %}
             </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         
     {% block content %}

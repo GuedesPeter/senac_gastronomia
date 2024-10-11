@@ -29,7 +29,7 @@ def financeiro(request):
     alimentos = Alimento.objects.all()
 
     if categoria:
-        alimentos = alimentos.filter(categoria_nome_icontains=categoria)
+        alimentos = alimentos.filter(categoria__nome__icontains=categoria)
     if validade:
         validade_convertida = converter_data(validade)
         if validade_convertida:
