@@ -23,8 +23,11 @@
                     <button class="btn btn-outline-primary mb-2" onclick="location.href='{% url 'alimento_create' %}'">
                         <i class="bi bi-box-seam"></i> Adicionar Alimento
                     </button>
-                    <button class="btn btn-outline-primary mb-2" onclick="location.href='#'">
-                        <i class="bi bi-box-seam"></i> Devoluções
+                    <button class="btn btn-outline-primary mb-2" onclick="location.href='{% url 'entradas_list' %}'">
+                        <i class="bi bi-box-seam"></i> Entradas
+                    </button>
+                    <button class="btn btn-outline-primary mb-2" onclick="location.href='{% url 'saidas_list' %}'">
+                        <i class="bi bi-box-seam"></i> Saídas
                     </button>
                     <button class="btn btn-outline-danger mb-2" onclick="location.href='{% url 'itens_vencidos' %}'">
                         <i class="bi bi-box-seam"></i> Itens Vencidos
