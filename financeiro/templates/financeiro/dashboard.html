@@ -1,0 +1,102 @@
+{% extends 'base_financeiro.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Dashboard Financeiro</h1>
+
+  <div class="chart-container">
+      <!-- Gráfico de Pizza - Categorias -->
+      <div class="chart-item">
+          <canvas id="categoriaChart"></canvas>
+      </div>
+
+      <!-- Gráfico de Pizza - Fornecedores -->
+      <div class="chart-item">
+          <canvas id="fornecedorChart"></canvas>
+      </div>
+  </div>
+
+  <div class="chart-container">
+      <!-- Gráfico de Custo Total -->
+      <div class="chart-item">
+          <canvas id="custoTotalChart"></canvas>
+      </div>
+
+      <!-- Gráfico de Total de Alimentos -->
+      <div class="chart-item">
+          <canvas id="totalAlimentosChart"></canvas>
+      </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+      // Gráfico de Categorias
+      const ctxCategoria = document.getElementById('categoriaChart').getContext('2d');
+      const categoriaLabels = {{ categoria_labels|safe }};
+      const categoriaTotals = {{ categoria_totals|safe }};
+      
+      const categoriaChart = new Chart(ctxCategoria, {
+          type: 'pie',
+          data: {
+              labels: categoriaLabels,
+              datasets: [{
+                  label: 'Quantidade por Categoria',
+                  data: categoriaTotals,
+                  backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+              }]
+          }
+      });
+
+      // Gráfico de Fornecedores
+      const ctxFornecedor = document.getElementById('fornecedorChart').getContext('2d');
+      const fornecedorLabels = {{ fornecedor_labels|safe }};
+      const fornecedorTotals = {{ fornecedor_totals|safe }};
+      
+      const fornecedorChart = new Chart(ctxFornecedor, {
+          type: 'pie',
+          data: {
+              labels: fornecedorLabels,
+              datasets: [{
+                  label: 'Quantidade por Fornecedor',
+                  data: fornecedorTotals,
+                  backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+              }]
+          }
+      });
+
+      // Gráfico de Custo Total
+      const ctxCustoTotal = document.getElementById('custoTotalChart').getContext('2d');
+      const custoTotalData = [{{ custo_total }}];
+
+      const custoTotalChart = new Chart(ctxCustoTotal, {
+          type: 'bar',
+          data: {
+              labels: ['Custo Total'],
+              datasets: [{
+                  label: 'Custo',
+                  data: custoTotalData,
+                  backgroundColor: '#FFCE56',
+              }]
+          }
+      });
+
+      // Gráfico de Total de Alimentos
+      const ctxTotalAlimentos = document.getElementById('totalAlimentosChart').getContext('2d');
+      const totalAlimentosData = [{{ quantidade_total }}];
+      
+      const totalAlimentosChart = new Chart(ctxTotalAlimentos, {
+          type: 'bar',
+          data: {
+              labels: ['Total de Alimentos'],
+              datasets: [{
+                  label: 'Quantidade',
+                  data: totalAlimentosData,
+                  backgroundColor: '#36A2EB',
+              }]
+          }
+      });
+  </script>
+</div>
+
+
+{% endblock %}

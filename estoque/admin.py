@@ -38,4 +38,3 @@ class EtiquetaAdmin(admin.ModelAdmin):
 @admin.register(AlimentoVencido)
 class AlimentoVencidoAdmin(admin.ModelAdmin):
     list_display = ('alimento', 'quantidade', 'peso', 'validade_venc', 'valor')
-
