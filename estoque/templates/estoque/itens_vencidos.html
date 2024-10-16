@@ -1,0 +1,101 @@
+{% extends 'base_estoque.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="col-md-2 d-md-block nav">
+            <div class="position-sticky">
+                <h4 class="text-light text-center mt-3 p-2 fw-bold">Gestão de Estoque</h4>
+                <div class="nav flex-column">
+                    <button class="btn btn-outline-warning mb-2" onclick="location.href='{% url 'alimento_list' %}'">
+                        <i class="bi bi-box-seam"></i> Home
+                    </button>
+                    <button class="btn btn-outline-info mb-2" onclick="location.href='{% url 'financeiro' %}'">
+                        <i class="bi bi-currency-dollar"></i> Financeiro
+                    </button>
+                    <button class="btn btn-outline-secondary mb-2" onclick="location.href='{% url 'deslogar' %}'">
+                        <i class="bi bi-door-open"></i> Sair da Aplicação
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Conteúdo Principal -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+            <div class="container mt-4">
+                <!-- Título e Card alinhados -->
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title text-danger">ITENS VENCIDOS</h2>
+                    <div class="dashboard-card card border-danger" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger fw-bold" style="text-transform: uppercase;">
+                                {% if categoria_nome %}
+                                    Itens Vencidos - {{ categoria_nome }}
+                                {% else %}
+                                    Itens Vencidos
+                                {% endif %}
+                            </h5>
+                            <p class="card-text">{{ total_itens_vencidos_categoria }}</p> <!-- Exibe o total -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário de Filtro -->
+                <form method="GET" class="mb-4">
+                    <div class="row">
+                        <div class="col-auto">
+                            <label for="categoria" class="form-label text-white">Filtrar por Categoria:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="categoria" name="categoria" class="form-select" onchange="this.form.submit()">
+                                <option value="">Todas as Categorias</option>
+                                {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}" {% if categoria.id|stringformat:"s" == request.GET.categoria %}selected{% endif %}>{{ categoria.nome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Tabela de Itens Vencidos -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-white">Categoria</th>
+                                <th class="text-white">Nome</th>
+                                <th class="text-white">Referência</th>
+                                <th class="text-white">Quantidade</th>
+                                <th class="text-white">Peso</th>
+                                <th class="text-white">Validade</th>
+                                <th class="text-white">Valor</th>
+                                <th class="text-white">Fornecedor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in itens_vencidos %}
+                            <tr class="table-danger"> <!-- Classe para cor vermelha -->
+                                <td>{{ item.categoria.nome }}</td>
+                                <td>{{ item.nome }}</td>
+                                <td>{{ item.referencia }}</td>
+                                <td>{{ item.quantidade }}</td>
+                                <td>{{ item.peso }}</td>
+                                <td>{{ item.validade }}</td>
+                                <td>{{ item.valor }}</td>
+                                <td>{{ item.nome_fornecedor }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center">Nenhum item vencido encontrado.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

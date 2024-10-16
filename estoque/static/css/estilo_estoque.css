@@ -11,7 +11,6 @@ body {
   color: #f8f9fa; /* Para garantir que o texto tenha contraste suficiente */
 }
 
-
 .home, .home-bg {
   height: 100vh;
   width: 100vw;
@@ -48,13 +47,11 @@ img, svg {
   */
 }
 
-
 .nav{
   background: rgba(0, 0, 0, 0.7); 
   border-radius: 15px;
   justify-content: center;
 }
-
 
 .container {
   max-width: 100%;
@@ -380,49 +377,38 @@ form .btn-outline-primary:hover {
   color: #007bff;
   cursor: pointer;
   text-align: center;
-  font-size: 0.9rem;
-  margin-top: 15px;
-}
-
-.hidden {
-  display: none;
-}
-
-#forgot-password {
-  text-align: center;
-  font-size: 0.9rem;
 }
 
 .toggle-btn:hover {
-  color: #0056b3;
+  text-decoration: underline;
 }
 
-.sign-in {
-  animation: slide-in 0.3s forwards;
+/* Styles para o dashboard */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.sign-up {
-  animation: slide-out 0.3s forwards;
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.dashboard-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-@keyframes slide-out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100%);
-  }
+.dashboard-card h3 {
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 1.2rem;
 }

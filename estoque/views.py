@@ -35,16 +35,55 @@ def categoria_create(request):
     return render(request, 'estoque/categoria_form.html', {'form': form})  # Renderiza um template específico para a criação
 
 
+def itens_vencidos(request):
+    # Obtém a data atual
+    data_atual = timezone.now().date()
+    
+    # Obtém todas as categorias
+    categorias = Categoria.objects.all()
+    
+    # Obtém a categoria selecionada, se houver
+    categoria_selecionada = request.GET.get('categoria', None)
+    
+    # Filtra os itens vencidos
+    if categoria_selecionada:
+        itens_vencidos = Alimento.objects.filter(validade__lt=data_atual, categoria_id=categoria_selecionada)
+    else:
+        itens_vencidos = Alimento.objects.filter(validade__lt=data_atual)
+
+    # Contagem de itens vencidos por categoria
+    itens_por_categoria = {categoria.id: Alimento.objects.filter(validade__lt=data_atual, categoria=categoria).count() for categoria in categorias}
+
+    # Total de itens vencidos na categoria selecionada ou todos os itens vencidos
+    total_itens_vencidos_categoria = itens_por_categoria.get(int(categoria_selecionada), 0) if categoria_selecionada else itens_vencidos.count()
+
+    # Obtem o nome da categoria selecionada, se houver
+    categoria_nome = None
+    if categoria_selecionada:
+        categoria = get_object_or_404(Categoria, id=categoria_selecionada)
+        categoria_nome = categoria.nome
+
+    # Renderiza o template com os dados
+    return render(request, 'estoque/itens_vencidos.html', {
+        'itens_vencidos': itens_vencidos,
+        'categorias': categorias,
+        'itens_por_categoria': itens_por_categoria,
+        'total_itens_vencidos_categoria': total_itens_vencidos_categoria,
+        'categoria_nome': categoria_nome,  # Adiciona o nome da categoria ao contexto
+    })
+
+
+
 class AlimentoListView(ListView):
     model = Alimento
     template_name = 'estoque/estoque.html'
     context_object_name = 'alimentos'
 
     def get_queryset(self):
-        queryset = Alimento.objects.all()  # Começa com todos os alimentos
+        queryset = Alimento.objects.filter(validade__gte=timezone.now().date())  # Filtra para incluir apenas alimentos não vencidos
 
         # Filtros
-        categoria_id = self.request.GET.get('categoria')
+        categoria_id = self.request.GET.get('categoria') or self.request.session.get('categoria_selecionada')
         if categoria_id:
             queryset = queryset.filter(categoria_id=categoria_id)
 
@@ -77,23 +116,37 @@ class AlimentoListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         now = timezone.now().date()
-        context['alimentos_vencidos'] = Alimento.objects.filter(validade__lt=now)
+        alimentos_vencidos = Alimento.objects.filter(validade__lt=now)
+
         context['categorias'] = Categoria.objects.all()  # Passa todas as categorias
         context['now'] = now  # Passa a data atual
 
+        # Verificando se há alimentos vencidos para a notificação e se a mensagem já foi exibida
+        total_vencidos = alimentos_vencidos.count()
+        mensagem_vista = self.request.session.get('mensagem_vista', False)
+
+        if total_vencidos > 0 and not mensagem_vista:
+            context['mensagem_vencidos'] = f"Atenção: Você possui {total_vencidos} alimento(s) vencido(s). Por favor, visualize a área de ITENS VENCIDOS."
+            self.request.session['mensagem_vista'] = True  # Marca que a mensagem já foi visualizada
+        else:
+            context['mensagem_vencidos'] = None  # Limpa a mensagem se não houver alimentos vencidos ou se a mensagem já foi visualizada
+
         # Calculando o valor total por categoria
-        categoria_id = self.request.GET.get('categoria')
+        categoria_id = self.request.GET.get('categoria') or self.request.session.get('categoria_selecionada')
+
         if categoria_id:
             context['valor_total_categoria'] = Alimento.objects.filter(categoria_id=categoria_id).aggregate(Sum('valor'))['valor__sum'] or 0
             context['categoria_atual'] = Categoria.objects.get(id=categoria_id).nome  # Adiciona o nome da categoria atual
             context['categoria_selecionada'] = categoria_id  # Passa a categoria selecionada para o template
+
+            # Armazenar a categoria na sessão
+            self.request.session['categoria_selecionada'] = categoria_id
         else:
             context['valor_total_categoria'] = 0
             context['categoria_atual'] = "Nenhuma Categoria Selecionada"  # Indica que nenhuma categoria foi escolhida
             context['categoria_selecionada'] = None  # Nenhuma categoria foi selecionada
 
         return context
-
 
 
 class AlimentoCreateView(CreateView):
@@ -285,3 +338,5 @@ class SaidasPDFView(View):
             return HttpResponse('Erro ao gerar PDF.')
 
         return response
+
+
