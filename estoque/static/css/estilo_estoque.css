@@ -1,14 +1,14 @@
+/* Estilos Globais */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estilo geral da página */
 body {
   font-family: 'Nunito', sans-serif;
   background-color: rgba(0, 0, 0, 0.7); /* Fundo preto translúcido */
-  color: #f8f9fa; /* Para garantir que o texto tenha contraste suficiente */
+  color: #f8f9fa; /* Para garantir contraste no texto */
 }
 
 .home, .home-bg {
@@ -41,14 +41,11 @@ img, svg {
 }
 
 .menu {
-  /* Caso queira adicionar um fundo de imagem para o menu
-  background: url(/static/img/home_bgmenu.jpg) no-repeat center center;
-  background-size: cover;
-  */
+  /* Estilo opcional para menu com fundo de imagem */
 }
 
-.nav{
-  background: rgba(0, 0, 0, 0.7); 
+.nav {
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 15px;
   justify-content: center;
 }
@@ -123,15 +120,11 @@ img, svg {
 
 /* Sidebar */
 .sidebar {
-  /* background: rgba(0, 0, 0, 0.7); */
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 15px;
   height: 100vh;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.sidebar h4 {
-  margin-bottom: 20px;
 }
 
 .sidebar .nav {
@@ -144,13 +137,13 @@ img, svg {
   color: #fff;
   border-radius: 5px;
   margin-bottom: 10px;
-  background-color: transparent; /* Remover fundo preto */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Adiciona borda transparente para melhor visibilidade */
+  background-color: transparent; /* Fundo transparente */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda transparente */
   transition: background-color 0.3s ease;
 }
 
 .sidebar .btn:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Mantenha a mudança de cor no hover */
+  background-color: rgba(255, 255, 255, 0.2); /* Fundo ao hover */
 }
 
 /* Conteúdo principal */
@@ -195,56 +188,49 @@ h4 {
   border-color: #dc3545 !important;
 }
 
-/* Tabela de Estoque */
-.table-responsive {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  padding: 15px;
+/* Tabela - Estilo Claro */
+.table-light {
+  background-color: #f8f9fa; /* Fundo claro */
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
 }
 
-.table thead th {
-  background-color: #343a40;
-  border: none;
-  text-transform: uppercase;
+.table-light thead th {
+  background-color: #e9ecef; /* Cabeçalho claro */
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
 }
 
-.table tbody td {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: none;
+.table-light tbody tr {
+  background-color: #ffffff; /* Linhas claras */
+  color: #212529;
 }
 
-.table tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.table-light tbody tr:hover {
+  background-color: #f1f3f5; /* Efeito hover claro */
 }
 
-/* Botões de Ação */
-.table tbody .btn-outline-warning {
+.table-light tbody td {
+  border-color: #dee2e6;
+}
+
+/* Botões de Ação na Tabela */
+.table-light tbody .btn-outline-warning {
   border-color: #ffc107;
   color: #ffc107;
 }
 
-.table tbody .btn-outline-warning:hover {
-  background-color: #ffc107;
-  color: #fff;
-}
-
-.table tbody .btn-outline-danger {
+.table-light tbody .btn-outline-danger {
   border-color: #dc3545;
   color: #dc3545;
 }
 
-.table tbody .btn-outline-danger:hover {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.table tbody .btn-outline-secondary {
+.table-light tbody .btn-outline-secondary {
   border-color: #6c757d;
   color: #6c757d;
 }
 
-.table tbody .btn-outline-secondary:hover {
-  background-color: #6c757d;
+.table-light tbody .btn:hover {
   color: #fff;
 }
 
@@ -348,7 +334,7 @@ form .btn-outline-primary:hover {
   }
 }
 
-/* Styles para login e cadastro */
+/* Estilo de login e cadastro */
 .container-home {
   min-height: 100vh;
   display: flex;
@@ -383,7 +369,7 @@ form .btn-outline-primary:hover {
   text-decoration: underline;
 }
 
-/* Styles para o dashboard */
+/* Dashboard */
 .dashboard-header {
   text-align: center;
   margin-bottom: 20px;
@@ -396,19 +382,18 @@ form .btn-outline-primary:hover {
 }
 
 .dashboard-card {
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  color: #ffffff;
   text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.dashboard-card h3 {
-  margin-bottom: 10px;
+.dashboard-card h5 {
+  font-size: 1.2rem;
 }
 
 .dashboard-card p {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
