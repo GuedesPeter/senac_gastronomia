@@ -177,10 +177,10 @@ class AlimentoCreateView(CreateView):
         alimento_existente = Alimento.objects.filter(nome=nome, referencia=referencia).first()
 
         if alimento_existente:
-            # Incrementa a quantidade, peso e valor do alimento existente
+            # Incrementa a quantidade, peso e mantém o valor sem multiplicação
             alimento_existente.quantidade += quantidade
             alimento_existente.peso += peso
-            alimento_existente.valor += (valor * quantidade)  # Multiplica o valor pela quantidade
+            alimento_existente.valor += valor  # Atribui o valor diretamente
             alimento_existente.save()
 
             # Registra a entrada do alimento existente
@@ -198,7 +198,7 @@ class AlimentoCreateView(CreateView):
             # Salva o novo alimento com todos os campos
             alimento = form.save(commit=False)
             alimento.categoria = categoria  # Atribui a categoria ao novo alimento
-            alimento.valor = valor * quantidade  # Atribui o valor multiplicado pela quantidade ao novo alimento
+            alimento.valor = valor  # Atribui o valor diretamente ao novo alimento
             alimento.save()
 
             # Registra a entrada do novo alimento
@@ -211,6 +211,7 @@ class AlimentoCreateView(CreateView):
             entrada.save()
 
         return super().form_valid(form)
+
 
 
 class AlimentoUpdateView(UpdateView):
