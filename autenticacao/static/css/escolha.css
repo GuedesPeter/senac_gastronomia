@@ -2,9 +2,9 @@
 .container.mt-5 {
   height: 100vh; /* Ocupa 100% da altura da tela */
   width: 100vw;  /* Ocupa 100% da largura da tela */
-  
+ 
   /* Configura a imagem de fundo */
-  background-image: url('/static/img/bg2.jpg');
+  /* background-image: url('/static/img/home_bg1.jpg'); */
   background-size: cover; /* Faz com que a imagem cubra toda a tela */
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat;
@@ -26,11 +26,11 @@ a {
   }
   
   .card1, .card2 {
-    background-color: #ffffff;
+    background-color: #ffffff29;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 500px;
+    max-width: 700px;
     overflow: hidden;
   }
   
@@ -57,7 +57,7 @@ a {
   .card-body h5 {
     font-size: 1.5rem;
     font-weight: 700; /* Negrito para o título */
-    color: #333333;
+    color: #f8f9fa;
     margin-bottom: 15px;
     font-family: 'Nunito', sans-serif;
   }
@@ -65,7 +65,7 @@ a {
   .card-body p {
     font-size: 1rem;
     font-weight: 600; /* Peso normal para o texto */
-    color: #666666;
+    color: #f8f9fa;
     margin-bottom: 15px;
     font-family: 'Nunito', sans-serif;
   }
