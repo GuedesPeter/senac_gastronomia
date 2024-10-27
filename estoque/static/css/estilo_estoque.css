@@ -9,11 +9,13 @@ body {
   font-family: 'Nunito', sans-serif;
   background-color: rgba(0, 0, 0, 0.7); /* Fundo preto translúcido */
   color: #f8f9fa; /* Para garantir contraste no texto */
+  overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
+/* Classes de Conteúdo Principal */
 .home, .home-bg {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .home {
@@ -30,139 +32,61 @@ body {
   background-blend-mode: overlay;
 }
 
-.logo {
-  margin: auto;
-  height: 200px;
-}
-
-img, svg {
-  vertical-align: middle;
-  height: 200px;
-}
-
-.menu {
-  /* Estilo opcional para menu com fundo de imagem */
-}
-
-.nav {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 15px;
-  justify-content: center;
-}
-
 .container {
   max-width: 100%;
-}
-
-/* Estilo do formulário de login */
-.card {
-  text-align: left;
-  background-color: #000000c7;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
 }
 
-.card-body {
-  padding: 20px;
-}
-
-.card h1 {
-  font-size: 2rem;
-  color: #333333;
-  margin-bottom: 20px;
-}
-
-/* Estilo das mensagens de erro */
-.alert {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-/* Estilo dos rótulos dos campos de entrada */
-.form-label {
-  text-align: left;
-  font-weight: 600;
-  color: #333333;
-  margin-bottom: 5px;
+/* Imagens e Logo */
+img, .logo, svg {
+  max-width: 100%;
+  height: auto;
   display: block;
+  margin: auto;
 }
 
-/* Estilo dos campos de entrada */
-.form-control {
-  border-radius: 5px;
-  border: 1px solid #ced4da;
-  padding: 10px;
-  font-size: 1rem;
-  margin-bottom: 15px;
+.logo {
+  height: auto;
 }
 
-/* Estilo do botão */
-.btn-primary {
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  font-size: 1rem;
-  padding: 1px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-}
-
-/* Sidebar */
+/* Ajuste dos Botões e Menus */
 .sidebar {
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 15px;
-  height: 100vh;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.sidebar .nav {
-  flex-direction: column;
+  flex-basis: 250px;
+  height: 100%;
 }
 
 .sidebar .btn {
   width: 100%;
   padding: 15px;
-  color: #fff;
-  border-radius: 5px;
   margin-bottom: 10px;
-  background-color: transparent; /* Fundo transparente */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda transparente */
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   transition: background-color 0.3s ease;
 }
 
 .sidebar .btn:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Fundo ao hover */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Conteúdo principal */
-.main-content {
+/* Ajuste de Formulários */
+.form-control, .form-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+}
+
+.card {
+  background-color: #000000c7;
+  border-radius: 10px;
   padding: 20px;
-}
-
-h4 {
-  font-weight: bold;
-}
-
-.card-title {
-  font-size: 1.1rem;
-}
-
-.card-text {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .card-body {
@@ -171,151 +95,50 @@ h4 {
   justify-content: space-between;
 }
 
-.card {
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+/* Tabelas */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 
-.card.border-primary {
-  border-color: #007bff !important;
-}
-
-.card.border-success {
-  border-color: #28a745 !important;
-}
-
-.card.border-danger {
-  border-color: #dc3545 !important;
-}
-
-/* Tabela - Estilo Claro */
-.table-light {
-  background-color: #f8f9fa; /* Fundo claro */
-  border-radius: 10px;
-  border: 1px solid #dee2e6;
-}
-
-.table-light thead th {
-  background-color: #e9ecef; /* Cabeçalho claro */
-  color: #495057;
-  border-bottom: 2px solid #dee2e6;
-}
-
-.table-light tbody tr {
-  background-color: #ffffff; /* Linhas claras */
-  color: #212529;
-}
-
-.table-light tbody tr:hover {
-  background-color: #f1f3f5; /* Efeito hover claro */
-}
-
-.table-light tbody td {
-  border-color: #dee2e6;
-}
-
-/* Botões de Ação na Tabela */
-.table-light tbody .btn-outline-warning {
-  border-color: #ffc107;
-  color: #ffc107;
-}
-
-.table-light tbody .btn-outline-danger {
-  border-color: #dc3545;
-  color: #dc3545;
-}
-
-.table-light tbody .btn-outline-secondary {
-  border-color: #6c757d;
-  color: #6c757d;
-}
-
-.table-light tbody .btn:hover {
-  color: #fff;
-}
-
-/* Modal */
-.modal-content {
-  background-color: rgba(0, 0, 0, 0.85);
-  border-radius: 10px;
-}
-
-.modal-title {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.modal-footer .btn-outline-danger {
-  border-color: #dc3545;
-  color: #dc3545;
-}
-
-.modal-footer .btn-outline-danger:hover {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.modal-footer .btn-outline-success {
-  border-color: #28a745;
-  color: #28a745;
-}
-
-.modal-footer .btn-outline-success:hover {
-  background-color: #28a745;
-  color: #fff;
-}
-
-/* Formulários de Filtro */
-form input, form select {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 5px;
-  color: #000;
-  font-weight: bold;
-  border: none;
-}
-
-form .btn-outline-primary {
-  border: 2px solid #007bff;
-  background: transparent;
-  font-weight: bold;
-  transition: background 0.3s, color 0.3s;
-}
-
-form .btn-outline-primary:hover {
-  background-color: #007bff;
-  color: #ffffff;
-}
-
-/* Estilo do gráfico */
-#piechart {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 10px;
-}
-
-/* Tabela */
 .table th, .table td {
-  vertical-align: middle;
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
 }
 
-/* Ajustes responsivos */
-@media (max-width: 1200px) {
+.table-light {
+  background-color: #f8f9fa;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 992px) {
   .sidebar {
-    width: 250px;
+    width: 200px;
+  }
+
+  .card {
+    padding: 15px;
   }
 }
 
 @media (max-width: 768px) {
-  .home {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .sidebar {
+  .home, .sidebar {
     width: 100%;
+    flex-basis: auto;
     height: auto;
   }
 
   .sidebar .btn {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .container {
     padding: 10px;
   }
 }
@@ -325,88 +148,25 @@ form .btn-outline-primary:hover {
     padding: 5px;
   }
 
-  .sidebar {
+  .card {
     padding: 10px;
   }
 
-  .carousel-img {
-    width: 100%;
+  .sidebar {
+    padding: 10px;
+    border-radius: 0;
   }
-}
 
-/* Estilo de login e cadastro */
-.container-home {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .sidebar .btn {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
 
-.home-card {
-  max-width: 400px;
-  width: 100%;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+  .container {
+    padding: 5px;
+  }
 
-.home-card .card-header {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-}
-
-.toggle-btn {
-  background-color: transparent;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  text-align: center;
-}
-
-.toggle-btn:hover {
-  text-decoration: underline;
-}
-
-/* Dashboard */
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.dashboard-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #ffffff;
-}
-
-.dashboard-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 20px;
-  color: #ffffff;
-  text-align: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.dashboard-card h5 {
-  font-size: 1.2rem;
-}
-
-.dashboard-card p {
-  font-size: 1.5rem;
-}
-
-.input-group .form-select,
-.input-group .form-control {
-    min-width: 80px; /* Largura mínima dos campos */
-    height: 30px; /* Altura do campo para torná-los menores */
-    border-radius: 0.25rem; /* Bordas arredondadas */
-}
-
-.input-group .btn {
-    margin-left: 5px; /* Espaçamento à esquerda dos botões */
-    height: 30px; /* Alinhamento da altura do botão com os campos */
-    border-radius: 0.25rem; /* Bordas arredondadas para os botões */
+  .card-body {
+    font-size: 0.9rem;
+  }
 }
