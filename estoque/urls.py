@@ -13,8 +13,8 @@ from .views import (
     UtilizarAlimentoView,
     EntradasListView,  
     SaidasListView,    
-    EntradasPDFView,   
-    SaidasPDFView,
+    # EntradasPDFView,   
+    # SaidasPDFView,
     deslogar_view,
     financeiro_view,
     categoria_create, 
@@ -30,11 +30,11 @@ urlpatterns = [
     path('utilizar/<int:pk>/', UtilizarAlimentoView.as_view(), name='utilizar_alimento'),  # Utilizar alimento (saída)
     path('entradas/', EntradasListView.as_view(), name='entradas_list'),  # Listar entradas
     path('saidas/', SaidasListView.as_view(), name='saidas_list'),  # Listar saídas
-    path('entradas/pdf/', EntradasPDFView.as_view(), name='entradas_pdf'),  # Gerar PDF de entradas
-    path('saidas/pdf/', SaidasPDFView.as_view(), name='saidas_pdf'),  # Gerar PDF de saídas
     path('categoria/criar/', categoria_create, name='categoria_create'),  # Adicionar nova categoria
     path('financeiro/', financeiro_view, name='financeiro'),
     path('deslogar/', deslogar_view, name='deslogar'),
     path('itens-vencidos/', itens_vencidos, name='itens_vencidos'),
+    # path('entradas/pdf/', EntradasPDFView.as_view(), name='entradas_pdf'),  # Gerar PDF de entradas
+    # path('saidas/pdf/', SaidasPDFView.as_view(), name='saidas_pdf'),  # Gerar PDF de saídas
     
 ]

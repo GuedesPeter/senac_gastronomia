@@ -32,21 +32,44 @@
         <main class="col-md-10 ms-sm-auto px-md-4 mt-4">
             <h2>Lista de Saídas</h2>
 
-            <!-- Botão para gerar PDF -->
-            <div class="mb-3">
-                <button class="btn btn-outline-success" onclick="location.href='{% url 'saidas_pdf' %}'">
-                    <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
+            <!-- Filtros -->
+            <form method="GET" class="mb-3">
+                <div class="input-group">
+                    <select name="categoria" class="form-select form-select-sm me-2">
+                        <option value="">Filtrar por Categoria</option>
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}" {% if categoria.id == request.GET.categoria|default:"" %}selected{% endif %}>{{ categoria.nome }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="date" name="data_inicio" class="form-control form-control-sm me-2" placeholder="Data Início" value="{{ request.GET.data_inicio }}">
+                    <input type="date" name="data_fim" class="form-control form-control-sm me-2" placeholder="Data Fim" value="{{ request.GET.data_fim }}">
+                    <input type="text" name="referencia" class="form-control form-control-sm me-2" placeholder="Referência do Produto" value="{{ request.GET.referencia }}">
+                </div>
+            </form>
+
+            <!-- Botões abaixo dos filtros -->
+            <div class="mb-3 d-flex justify-content-start">
+                <button class="btn btn-outline-primary btn-sm me-2" type="submit" onclick="document.forms[0].submit()">Filtrar</button>
+                <button class="btn btn-outline-secondary btn-sm me-2" onclick="location.href='{{ request.path }}'">
+                    Limpar Filtros
                 </button>
+                {% comment %} 
+                <button class="btn btn-outline-success btn-sm" onclick="location.href='{% url 'saidas_pdf' %}'">
+                    <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
+                </button> 
+                {% endcomment %}
             </div>
 
+
             <!-- Tabela de saídas -->
-            <table class="table table-light table-bordered table-striped">
+            <table class="table table-dark table-bordered table-striped">
                 <thead class="thead-light">
                     <tr>
                         <th>Alimento</th>
                         <th>Quantidade</th>
                         <th>Peso</th>
                         <th>Validade</th>
+                        <th>Data de Registro</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,15 +79,55 @@
                         <td>{{ saida.quantidade }}</td>
                         <td>{{ saida.peso }}</td>
                         <td>{{ saida.validade }}</td>
+                        <td>{{ saida.data }}</td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="4" class="text-center">Nenhuma saída registrada.</td>
+                        <td colspan="5" class="text-center">Nenhuma saída registrada.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            
+            <!-- Paginação -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                    <span class="text-light">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                </div>
+                <nav>
+                    <ul class="pagination pagination-sm">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">Primeira</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                            </li>
+                        {% endif %}
 
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.nome %}&nome={{ request.GET.nome }}{% endif %}{% if request.GET.referencia %}&referencia={{ request.GET.referencia }}{% endif %}{% if request.GET.data_entrada %}&data_entrada={{ request.GET.data_entrada }}{% endif %}{% if request.GET.nro_nota %}&nro_nota={{ request.GET.nro_nota }}{% endif %}{% if request.GET.marca %}&marca={{ request.GET.marca }}{% endif %}{% if request.GET.nome_fornecedor %}&nome_fornecedor={{ request.GET.nome_fornecedor }}{% endif %}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
         </main>
     </div>
 </div>

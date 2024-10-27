@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <!-- Filtros -->
+          <!-- Filtros -->
             <div class="mb-4" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px; padding: 15px;">
                 <form method="get">
                     <div class="row g-2">
@@ -85,17 +85,24 @@
                             <input type="text" name="referencia" class="form-control" placeholder="Ref." value="{{ request.GET.referencia }}" style="font-weight: bold; color: black;">
                         </div>
                         <div class="col-md-2">
-                            <input type="date" name="data_entrada" class="form-control" value="{{ request.GET.data_entrada }}" style="font-weight: bold; color: black;">
+                            <input type="text" name="nome_fornecedor" class="form-control" placeholder="Fornecedor" value="{{ request.GET.nome_fornecedor }}" style="font-weight: bold; color: black;">
                         </div>
                         <div class="col-md-2">
                             <input type="text" name="nro_nota" class="form-control" placeholder="Nº Nota" value="{{ request.GET.nro_nota }}" style="font-weight: bold; color: black;">
                         </div>
                         <div class="col-md-2">
+                    </div>
+                    <div class="row g-2 mt-2">
+                        <div class="col-md-2">
                             <button type="submit" class="btn btn-outline-primary w-100">Filtrar</button>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{% url 'alimento_list' %}" class="btn btn-outline-secondary w-100">Limpar Filtros</a>
                         </div>
                     </div>
                 </form>
             </div>
+
 
             <!-- Tabela de Estoque -->
             <div class="table-responsive" style="background: rgba(0, 0, 0, 0.7); border-radius: 15px; padding: 15px;">
@@ -220,6 +227,48 @@
                 </div>
             </div>
             {% endfor %}
+
+
+            <!-- Paginação -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div>
+                    <span class="text-light">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                </div>
+                <nav>
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">Primeira</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                            </li>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">{{ num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.nome %}&nome={{ request.GET.nome }}{% endif %}{% if request.GET.referencia %}&referencia={{ request.GET.referencia }}{% endif %}{% if request.GET.data_entrada %}&data_entrada={{ request.GET.data_entrada }}{% endif %}{% if request.GET.nro_nota %}&nro_nota={{ request.GET.nro_nota }}{% endif %}{% if request.GET.marca %}&marca={{ request.GET.marca }}{% endif %}{% if request.GET.nome_fornecedor %}&nome_fornecedor={{ request.GET.nome_fornecedor }}{% endif %}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
         </main>
     </div>
 </div>
