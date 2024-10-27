@@ -397,3 +397,16 @@ form .btn-outline-primary:hover {
 .dashboard-card p {
   font-size: 1.5rem;
 }
+
+.input-group .form-select,
+.input-group .form-control {
+    min-width: 80px; /* Largura mínima dos campos */
+    height: 30px; /* Altura do campo para torná-los menores */
+    border-radius: 0.25rem; /* Bordas arredondadas */
+}
+
+.input-group .btn {
+    margin-left: 5px; /* Espaçamento à esquerda dos botões */
+    height: 30px; /* Alinhamento da altura do botão com os campos */
+    border-radius: 0.25rem; /* Bordas arredondadas para os botões */
+}

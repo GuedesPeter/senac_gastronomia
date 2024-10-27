@@ -9,9 +9,12 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
 from xhtml2pdf import pisa  # Certifique-se de que a biblioteca xhtml2pdf está instalada
-
+from datetime import datetime
+from django.core.paginator import Paginator
+from django.utils.dateparse import parse_date
 from .models import Alimento, Entrada, Saida, Categoria  # Certifique-se que os modelos estão definidos corretamente
 from .forms import AlimentoForm, CategoriaForm  # Certifique-se que os forms estão definidos
+
 
 
 def deslogar_view(request):
@@ -57,7 +60,12 @@ def itens_vencidos(request):
     # Total de itens vencidos na categoria selecionada ou todos os itens vencidos
     total_itens_vencidos_categoria = itens_por_categoria.get(int(categoria_selecionada), 0) if categoria_selecionada else itens_vencidos.count()
 
-    # Obtem o nome da categoria selecionada, se houver
+    # Paginação
+    page_number = request.GET.get('page', 1)  # Obtém o número da página atual, padrão é 1
+    paginator = Paginator(itens_vencidos, 10)  # 10 itens por página
+    page_obj = paginator.get_page(page_number)  # Obtém a página correspondente
+
+    # Obtém o nome da categoria selecionada, se houver
     categoria_nome = None
     if categoria_selecionada:
         categoria = get_object_or_404(Categoria, id=categoria_selecionada)
@@ -65,19 +73,21 @@ def itens_vencidos(request):
 
     # Renderiza o template com os dados
     return render(request, 'estoque/itens_vencidos.html', {
-        'itens_vencidos': itens_vencidos,
+        'itens_vencidos': page_obj,  # Envie a página em vez da queryset completa
         'categorias': categorias,
         'itens_por_categoria': itens_por_categoria,
         'total_itens_vencidos_categoria': total_itens_vencidos_categoria,
         'categoria_nome': categoria_nome,  # Adiciona o nome da categoria ao contexto
+        'page_obj': page_obj,  # Passa o objeto da página para o template
+        'categoria_selecionada': categoria_selecionada,  # Passa a categoria selecionada para o template
     })
-
 
 
 class AlimentoListView(ListView):
     model = Alimento
     template_name = 'estoque/estoque.html'
     context_object_name = 'alimentos'
+    paginate_by = 10  # Defina o número de alimentos por página
 
     def get_queryset(self):
         queryset = Alimento.objects.filter(validade__gte=timezone.now().date())  # Filtra para incluir apenas alimentos não vencidos
@@ -94,10 +104,6 @@ class AlimentoListView(ListView):
         referencia = self.request.GET.get('referencia')
         if referencia:
             queryset = queryset.filter(referencia__icontains=referencia)
-
-        data_entrada = self.request.GET.get('data_entrada')
-        if data_entrada:
-            queryset = queryset.filter(data_entrada=data_entrada)
 
         nro_nota = self.request.GET.get('nro_nota')
         if nro_nota:
@@ -177,10 +183,9 @@ class AlimentoCreateView(CreateView):
         alimento_existente = Alimento.objects.filter(nome=nome, referencia=referencia).first()
 
         if alimento_existente:
-            # Incrementa a quantidade, peso e mantém o valor sem multiplicação
+            # Incrementa a quantidade e o peso
             alimento_existente.quantidade += quantidade
             alimento_existente.peso += peso
-            alimento_existente.valor += valor  # Atribui o valor diretamente
             alimento_existente.save()
 
             # Registra a entrada do alimento existente
@@ -211,6 +216,7 @@ class AlimentoCreateView(CreateView):
             entrada.save()
 
         return super().form_valid(form)
+
 
 
 
@@ -268,11 +274,13 @@ class UtilizarAlimentoView(View):
                 alimento=alimento,
                 quantidade=quantidade_utilizada,
                 peso=peso_utilizado,
-                validade=alimento.validade  # Ajuste conforme necessário
+                validade=alimento.validade,  # Ajuste conforme necessário
+                data=datetime.now()  # Adiciona a data da saída
             )
             saida.save()
 
         return redirect('alimento_list')
+
 
 
 class AlimentoDeleteView(DeleteView):
@@ -283,61 +291,148 @@ class AlimentoDeleteView(DeleteView):
 
 class EntradasListView(ListView):
     model = Entrada
-    template_name = 'estoque/entradas_list.html'  # Crie este template
+    template_name = 'estoque/entradas_list.html'
     context_object_name = 'entradas'
+    paginate_by = 10  # Define o número de entradas por página
 
     def get_queryset(self):
-        return Entrada.objects.all().order_by('-validade')
+        queryset = Entrada.objects.all().order_by('-validade')
+
+        # Filtrando por categoria
+        categoria_id = self.request.GET.get('categoria')
+        if categoria_id:
+            queryset = queryset.filter(alimento__categoria__id=categoria_id)
+
+        # Filtrando por intervalo de datas
+        data_inicio = self.request.GET.get('data_inicio')
+        data_fim = self.request.GET.get('data_fim')
+        if data_inicio and data_fim:
+            queryset = queryset.filter(data__range=[data_inicio, data_fim])
+
+        # Filtrando por referência do alimento
+        referencia = self.request.GET.get('referencia')
+        if referencia:
+            queryset = queryset.filter(alimento__referencia__icontains=referencia)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = Categoria.objects.all()  # Supondo que exista um modelo Categoria
+        return context
 
 
 class SaidasListView(ListView):
     model = Saida
-    template_name = 'estoque/saidas_list.html'  # Crie este template
+    template_name = 'estoque/saidas_list.html'
     context_object_name = 'saidas'
+    paginate_by = 10  # Define o número de saídas por página
 
     def get_queryset(self):
-        return Saida.objects.all().order_by('-validade')
+        queryset = Saida.objects.all().order_by('-validade')
+
+        # Filtrando por categoria
+        categoria_id = self.request.GET.get('categoria')
+        if categoria_id:
+            queryset = queryset.filter(alimento__categoria__id=categoria_id)
+
+        # Filtrando por intervalo de datas
+        data_inicio = self.request.GET.get('data_inicio')
+        data_fim = self.request.GET.get('data_fim')
+        if data_inicio and data_fim:
+            queryset = queryset.filter(data__range=[data_inicio, data_fim])
+
+        # Filtrando por referência do produto
+        referencia = self.request.GET.get('referencia')
+        if referencia:
+            queryset = queryset.filter(alimento__referencia__icontains=referencia)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = Categoria.objects.all()  # Supondo que exista um modelo Categoria
+        return context
 
 
-class EntradasPDFView(View):
-    def get(self, request, *args, **kwargs):
-        entradas = Entrada.objects.all()
-        template = 'estoque/entradas_pdf.html'  # Crie este template
 
-        context = {
-            'entradas': entradas,
-        }
+# class EntradasPDFView(View):
+#     def get(self, request, *args, **kwargs):
+#         # Obtém os parâmetros de filtro
+#         categoria_selecionada = request.GET.get('categoria', None)
+#         data_inicio = request.GET.get('data_inicio', None)
+#         data_fim = request.GET.get('data_fim', None)
 
-        html = render_to_string(template, context)
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="entradas.pdf"'
+#         # Filtra as entradas com base nos parâmetros de filtro
+#         entradas = Entrada.objects.all()
+
+#         if categoria_selecionada:
+#             entradas = entradas.filter(categoria_id=categoria_selecionada)
+#         if data_inicio:
+#             entradas = entradas.filter(data_entrada__gte=parse_date(data_inicio))
+#         if data_fim:
+#             entradas = entradas.filter(data_entrada__lte=parse_date(data_fim))
+
+#         # Debug: Verifique as entradas filtradas
+#         print("Entradas filtradas:", entradas)
+
+#         template = 'estoque/entradas_pdf.html'  # Certifique-se de que este template existe
+
+#         context = {
+#             'entradas': entradas,
+#             'categoria_selecionada': categoria_selecionada,
+#             'data_inicio': data_inicio,
+#             'data_fim': data_fim,
+#         }
+
+#         html = render_to_string(template, context)
+#         response = HttpResponse(content_type='application/pdf')
+#         response['Content-Disposition'] = 'attachment; filename="entradas.pdf"'
         
-        pisa_status = pisa.CreatePDF(html, dest=response)
+#         pisa_status = pisa.CreatePDF(html, dest=response)
 
-        if pisa_status.err:
-            return HttpResponse('Erro ao gerar PDF.')
+#         if pisa_status.err:
+#             return HttpResponse('Erro ao gerar PDF.')
 
-        return response
+#         return response
 
 
-class SaidasPDFView(View):
-    def get(self, request, *args, **kwargs):
-        saidas = Saida.objects.all()
-        template = 'estoque/saidas_pdf.html'  # Crie este template
+# class SaidasPDFView(View):
+#     def get(self, request, *args, **kwargs):
+#         # Obtém os parâmetros de filtro
+#         categoria_selecionada = request.GET.get('categoria', None)
+#         data_inicio = request.GET.get('data_inicio', None)
+#         data_fim = request.GET.get('data_fim', None)
 
-        context = {
-            'saidas': saidas,
-        }
+#         # Filtra as saídas com base nos parâmetros de filtro
+#         saidas = Saida.objects.all()
 
-        html = render_to_string(template, context)
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="saidas.pdf"'
+#         if categoria_selecionada:
+#             saidas = saidas.filter(categoria_id=categoria_selecionada)
+#         if data_inicio:
+#             saidas = saidas.filter(data__gte=parse_date(data_inicio))
+#         if data_fim:
+#             saidas = saidas.filter(data__lte=parse_date(data_fim))
+
+#         # Debug: Verifique as saídas filtradas
+#         print("Saídas filtradas:", saidas)
+
+#         template = 'estoque/saidas_pdf.html'  # Certifique-se de que este template existe
+
+#         context = {
+#             'saidas': saidas,
+#             'categoria_selecionada': categoria_selecionada,
+#             'data_inicio': data_inicio,
+#             'data_fim': data_fim,
+#         }
+
+#         html = render_to_string(template, context)
+#         response = HttpResponse(content_type='application/pdf')
+#         response['Content-Disposition'] = 'attachment; filename="saidas.pdf"'
         
-        pisa_status = pisa.CreatePDF(html, dest=response)
+#         pisa_status = pisa.CreatePDF(html, dest=response)
 
-        if pisa_status.err:
-            return HttpResponse('Erro ao gerar PDF.')
+#         if pisa_status.err:
+#             return HttpResponse('Erro ao gerar PDF.')
 
-        return response
-
-
+#         return response
