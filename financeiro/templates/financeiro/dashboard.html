@@ -27,14 +27,34 @@
           <canvas id="totalAlimentosChart"></canvas>
       </div>
   </div>
-
+  
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+      function getRandomColor() {
+          const letters = '0123456789ABCDEF';
+          let color = '#';
+          for (let i = 0; i < 6; i++) {
+              color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+      }
+
+      // Função para evitar cores repetidas
+      function generateUniqueColors(labels) {
+          const colors = new Set();
+          while (colors.size < labels.length) {
+              colors.add(getRandomColor());
+          }
+          return Array.from(colors);
+      }
+
       // Gráfico de Categorias
       const ctxCategoria = document.getElementById('categoriaChart').getContext('2d');
       const categoriaLabels = {{ categoria_labels|safe }};
       const categoriaTotals = {{ categoria_totals|safe }};
-      
+      const categoriaColors = generateUniqueColors(categoriaLabels); // Para cores únicas
+
       const categoriaChart = new Chart(ctxCategoria, {
           type: 'pie',
           data: {
@@ -42,8 +62,30 @@
               datasets: [{
                   label: 'Quantidade por Categoria',
                   data: categoriaTotals,
-                  backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                  backgroundColor: categoriaColors,
               }]
+          },
+          options: {
+              plugins: {
+                  tooltip: {
+                      callbacks: {
+                          label: (tooltipItem) => {
+                              let total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                              let value = tooltipItem.raw;
+                              let percentage = ((value / total) * 100).toFixed(2) + '%';
+                              return `${tooltipItem.label}: ${value} (${percentage})`;
+                          }
+                      }
+                  },
+                  datalabels: {
+                      formatter: (value, ctx) => {
+                          let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                          let percentage = ((value / total) * 100).toFixed(2) + '%'; // Cálculo do percentual
+                          return percentage; // Exibir o percentual
+                      },
+                      color: '#fff', // Cor do texto
+                  }
+              }
           }
       });
 
@@ -51,7 +93,8 @@
       const ctxFornecedor = document.getElementById('fornecedorChart').getContext('2d');
       const fornecedorLabels = {{ fornecedor_labels|safe }};
       const fornecedorTotals = {{ fornecedor_totals|safe }};
-      
+      const fornecedorColors = generateUniqueColors(fornecedorLabels); // Para cores únicas
+
       const fornecedorChart = new Chart(ctxFornecedor, {
           type: 'pie',
           data: {
@@ -59,8 +102,30 @@
               datasets: [{
                   label: 'Quantidade por Fornecedor',
                   data: fornecedorTotals,
-                  backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                  backgroundColor: fornecedorColors,
               }]
+          },
+          options: {
+              plugins: {
+                  tooltip: {
+                      callbacks: {
+                          label: (tooltipItem) => {
+                              let total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                              let value = tooltipItem.raw;
+                              let percentage = ((value / total) * 100).toFixed(2) + '%';
+                              return `${tooltipItem.label}: ${value} (${percentage})`;
+                          }
+                      }
+                  },
+                  datalabels: {
+                      formatter: (value, ctx) => {
+                          let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                          let percentage = ((value / total) * 100).toFixed(2) + '%'; // Cálculo do percentual
+                          return percentage; // Exibir o percentual
+                      },
+                      color: '#fff', // Cor do texto
+                  }
+              }
           }
       });
 
@@ -83,7 +148,7 @@
       // Gráfico de Total de Alimentos
       const ctxTotalAlimentos = document.getElementById('totalAlimentosChart').getContext('2d');
       const totalAlimentosData = [{{ quantidade_total }}];
-      
+
       const totalAlimentosChart = new Chart(ctxTotalAlimentos, {
           type: 'bar',
           data: {
@@ -97,6 +162,4 @@
       });
   </script>
 </div>
-
-
 {% endblock %}
