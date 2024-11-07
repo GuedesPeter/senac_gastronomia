@@ -71,7 +71,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for alimento in alimentos %}
+            {% for alimento in page_obj %}
             <tr>
                 <td>{{ alimento.nome }}</td>
                 <td>{{ alimento.quantidade }}</td>
@@ -92,6 +92,47 @@
             {% endfor %}
         </tbody>
     </table>
+    
+    <!-- Navegação de Páginas -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+            <span class="text-light">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        </div>
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">Primeira</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.nome %}&nome={{ request.GET.nome }}{% endif %}{% if request.GET.referencia %}&referencia={{ request.GET.referencia }}{% endif %}{% if request.GET.data_entrada %}&data_entrada={{ request.GET.data_entrada }}{% endif %}{% if request.GET.nro_nota %}&nro_nota={{ request.GET.nro_nota }}{% endif %}{% if request.GET.marca %}&marca={{ request.GET.marca }}{% endif %}{% if request.GET.nome_fornecedor %}&nome_fornecedor={{ request.GET.nome_fornecedor }}{% endif %}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    
     
 </div>
 {% endblock %}

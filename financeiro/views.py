@@ -6,9 +6,8 @@ from estoque.models import Alimento
 from datetime import datetime
 from django.db.models import Sum
 from .models import Alimento
+from django.core.paginator import Paginator
 
-
-# FINACEIRO
 def financeiro(request):
     # Obter os parâmetros de filtragem e ordenação da URL
     categoria = request.GET.get('categoria', '')
@@ -18,7 +17,6 @@ def financeiro(request):
     marca = request.GET.get('marca', '')
     ordenar_por = request.GET.get('ordenar_por', 'nome')  # Coluna padrão para ordenar
 
-    # Função para converter data no formato brasileiro (dd/mm/aaaa) para formato ISO (aaaa-mm-dd)
     def converter_data(data_brasileira):
         try:
             return datetime.strptime(data_brasileira, '%d/%m/%Y').date()
@@ -46,17 +44,18 @@ def financeiro(request):
     # Ordenar alimentos
     alimentos = alimentos.order_by(ordenar_por)
 
+    # Paginação: exibir 10 produtos por página
+    paginator = Paginator(alimentos, 10)  # 10 produtos por página
+    page_number = request.GET.get('page')  # Número da página atual
+    page_obj = paginator.get_page(page_number)
+
     # Calcular métricas
-    # Resultado de quantidade por linha
-    # quantidade_total = alimentos.count()
-   
-    # Resultado de quantidade por total
     quantidade_total = sum([alimento.quantidade for alimento in alimentos])
     custo_total = sum([alimento.valor * alimento.quantidade for alimento in alimentos])
 
     # Contexto para o template
     context = {
-        'alimentos': alimentos,
+        'page_obj': page_obj,  # Passar a página paginada
         'quantidade_total': quantidade_total,
         'custo_total': custo_total,
         'categoria': categoria,
@@ -66,8 +65,10 @@ def financeiro(request):
         'marca': marca,
         'ordenar_por': ordenar_por
     }
-
+    
     return render(request, 'financeiro/financeiro.html', context)
+
+
 def gerar_pdf(request):
     # Obter os parâmetros de filtragem e ordenação da URL
     categoria = request.GET.get('categoria', '')
