@@ -1,165 +1,169 @@
 {% extends 'base_financeiro.html' %}
 
 {% block content %}
-<div class="container">
-  <h1>Dashboard Financeiro</h1>
+    <div class="container">
+    <h1>Dashboard Financeiro</h1>
 
-  <div class="chart-container">
-      <!-- Gráfico de Pizza - Categorias -->
-      <div class="chart-item">
-          <canvas id="categoriaChart"></canvas>
-      </div>
+    <div class="d-flex gap-2 mb-2">
+        <a href="{% url 'financeiro' %}" class="btn btn-info">Voltar Financeiro</a>
+    </div>
 
-      <!-- Gráfico de Pizza - Fornecedores -->
-      <div class="chart-item">
-          <canvas id="fornecedorChart"></canvas>
-      </div>
-  </div>
+    <div class="chart-container">
+        <!-- Gráfico de Pizza - Categorias -->
+        <div class="chart-item">
+            <canvas id="categoriaChart"></canvas>
+        </div>
 
-  <div class="chart-container">
-      <!-- Gráfico de Custo Total -->
-      <div class="chart-item">
-          <canvas id="custoTotalChart"></canvas>
-      </div>
+        <!-- Gráfico de Pizza - Fornecedores -->
+        <div class="chart-item">
+            <canvas id="fornecedorChart"></canvas>
+        </div>
+    </div>
 
-      <!-- Gráfico de Total de Alimentos -->
-      <div class="chart-item">
-          <canvas id="totalAlimentosChart"></canvas>
-      </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-      function getRandomColor() {
-          const letters = '0123456789ABCDEF';
-          let color = '#';
-          for (let i = 0; i < 6; i++) {
-              color += letters[Math.floor(Math.random() * 16)];
-          }
-          return color;
-      }
+    <div class="chart-container">
+        <!-- Gráfico de Custo Total -->
+        <div class="chart-item">
+            <canvas id="custoTotalChart"></canvas>
+        </div>
 
-      // Função para evitar cores repetidas
-      function generateUniqueColors(labels) {
-          const colors = new Set();
-          while (colors.size < labels.length) {
-              colors.add(getRandomColor());
-          }
-          return Array.from(colors);
-      }
+        <!-- Gráfico de Total de Alimentos -->
+        <div class="chart-item">
+            <canvas id="totalAlimentosChart"></canvas>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
 
-      // Gráfico de Categorias
-      const ctxCategoria = document.getElementById('categoriaChart').getContext('2d');
-      const categoriaLabels = {{ categoria_labels|safe }};
-      const categoriaTotals = {{ categoria_totals|safe }};
-      const categoriaColors = generateUniqueColors(categoriaLabels); // Para cores únicas
+        // Função para evitar cores repetidas
+        function generateUniqueColors(labels) {
+            const colors = new Set();
+            while (colors.size < labels.length) {
+                colors.add(getRandomColor());
+            }
+            return Array.from(colors);
+        }
 
-      const categoriaChart = new Chart(ctxCategoria, {
-          type: 'pie',
-          data: {
-              labels: categoriaLabels,
-              datasets: [{
-                  label: 'Quantidade por Categoria',
-                  data: categoriaTotals,
-                  backgroundColor: categoriaColors,
-              }]
-          },
-          options: {
-              plugins: {
-                  tooltip: {
-                      callbacks: {
-                          label: (tooltipItem) => {
-                              let total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
-                              let value = tooltipItem.raw;
-                              let percentage = ((value / total) * 100).toFixed(2) + '%';
-                              return `${tooltipItem.label}: ${value} (${percentage})`;
-                          }
-                      }
-                  },
-                  datalabels: {
-                      formatter: (value, ctx) => {
-                          let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                          let percentage = ((value / total) * 100).toFixed(2) + '%'; // Cálculo do percentual
-                          return percentage; // Exibir o percentual
-                      },
-                      color: '#fff', // Cor do texto
-                  }
-              }
-          }
-      });
+        // Gráfico de Categorias
+        const ctxCategoria = document.getElementById('categoriaChart').getContext('2d');
+        const categoriaLabels = {{ categoria_labels|safe }};
+        const categoriaTotals = {{ categoria_totals|safe }};
+        const categoriaColors = generateUniqueColors(categoriaLabels); // Para cores únicas
 
-      // Gráfico de Fornecedores
-      const ctxFornecedor = document.getElementById('fornecedorChart').getContext('2d');
-      const fornecedorLabels = {{ fornecedor_labels|safe }};
-      const fornecedorTotals = {{ fornecedor_totals|safe }};
-      const fornecedorColors = generateUniqueColors(fornecedorLabels); // Para cores únicas
+        const categoriaChart = new Chart(ctxCategoria, {
+            type: 'pie',
+            data: {
+                labels: categoriaLabels,
+                datasets: [{
+                    label: 'Quantidade por Categoria',
+                    data: categoriaTotals,
+                    backgroundColor: categoriaColors,
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: (tooltipItem) => {
+                                let total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                                let value = tooltipItem.raw;
+                                let percentage = ((value / total) * 100).toFixed(2) + '%';
+                                return `${tooltipItem.label}: ${value} (${percentage})`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            let percentage = ((value / total) * 100).toFixed(2) + '%'; // Cálculo do percentual
+                            return percentage; // Exibir o percentual
+                        },
+                        color: '#fff', // Cor do texto
+                    }
+                }
+            }
+        });
 
-      const fornecedorChart = new Chart(ctxFornecedor, {
-          type: 'pie',
-          data: {
-              labels: fornecedorLabels,
-              datasets: [{
-                  label: 'Quantidade por Fornecedor',
-                  data: fornecedorTotals,
-                  backgroundColor: fornecedorColors,
-              }]
-          },
-          options: {
-              plugins: {
-                  tooltip: {
-                      callbacks: {
-                          label: (tooltipItem) => {
-                              let total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
-                              let value = tooltipItem.raw;
-                              let percentage = ((value / total) * 100).toFixed(2) + '%';
-                              return `${tooltipItem.label}: ${value} (${percentage})`;
-                          }
-                      }
-                  },
-                  datalabels: {
-                      formatter: (value, ctx) => {
-                          let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                          let percentage = ((value / total) * 100).toFixed(2) + '%'; // Cálculo do percentual
-                          return percentage; // Exibir o percentual
-                      },
-                      color: '#fff', // Cor do texto
-                  }
-              }
-          }
-      });
+        // Gráfico de Fornecedores
+        const ctxFornecedor = document.getElementById('fornecedorChart').getContext('2d');
+        const fornecedorLabels = {{ fornecedor_labels|safe }};
+        const fornecedorTotals = {{ fornecedor_totals|safe }};
+        const fornecedorColors = generateUniqueColors(fornecedorLabels); // Para cores únicas
 
-      // Gráfico de Custo Total
-      const ctxCustoTotal = document.getElementById('custoTotalChart').getContext('2d');
-      const custoTotalData = [{{ custo_total }}];
+        const fornecedorChart = new Chart(ctxFornecedor, {
+            type: 'pie',
+            data: {
+                labels: fornecedorLabels,
+                datasets: [{
+                    label: 'Quantidade por Fornecedor',
+                    data: fornecedorTotals,
+                    backgroundColor: fornecedorColors,
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: (tooltipItem) => {
+                                let total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                                let value = tooltipItem.raw;
+                                let percentage = ((value / total) * 100).toFixed(2) + '%';
+                                return `${tooltipItem.label}: ${value} (${percentage})`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        formatter: (value, ctx) => {
+                            let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            let percentage = ((value / total) * 100).toFixed(2) + '%'; // Cálculo do percentual
+                            return percentage; // Exibir o percentual
+                        },
+                        color: '#fff', // Cor do texto
+                    }
+                }
+            }
+        });
 
-      const custoTotalChart = new Chart(ctxCustoTotal, {
-          type: 'bar',
-          data: {
-              labels: ['Custo Total'],
-              datasets: [{
-                  label: 'Custo',
-                  data: custoTotalData,
-                  backgroundColor: '#FFCE56',
-              }]
-          }
-      });
+        // Gráfico de Custo Total
+        const ctxCustoTotal = document.getElementById('custoTotalChart').getContext('2d');
+        const custoTotalData = [{{ custo_total }}];
 
-      // Gráfico de Total de Alimentos
-      const ctxTotalAlimentos = document.getElementById('totalAlimentosChart').getContext('2d');
-      const totalAlimentosData = [{{ quantidade_total }}];
+        const custoTotalChart = new Chart(ctxCustoTotal, {
+            type: 'bar',
+            data: {
+                labels: ['Custo Total'],
+                datasets: [{
+                    label: 'Custo',
+                    data: custoTotalData,
+                    backgroundColor: '#FFCE56',
+                }]
+            }
+        });
 
-      const totalAlimentosChart = new Chart(ctxTotalAlimentos, {
-          type: 'bar',
-          data: {
-              labels: ['Total de Alimentos'],
-              datasets: [{
-                  label: 'Quantidade',
-                  data: totalAlimentosData,
-                  backgroundColor: '#36A2EB',
-              }]
-          }
-      });
-  </script>
+        // Gráfico de Total de Alimentos
+        const ctxTotalAlimentos = document.getElementById('totalAlimentosChart').getContext('2d');
+        const totalAlimentosData = [{{ quantidade_total }}];
+
+        const totalAlimentosChart = new Chart(ctxTotalAlimentos, {
+            type: 'bar',
+            data: {
+                labels: ['Total de Alimentos'],
+                datasets: [{
+                    label: 'Quantidade',
+                    data: totalAlimentosData,
+                    backgroundColor: '#36A2EB',
+                }]
+            }
+        });
+    </script>
 </div>
 {% endblock %}
