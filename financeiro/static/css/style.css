@@ -1,14 +1,19 @@
 /* Corpo */
 body {
     font-family: 'Arial', sans-serif; /* Define a fonte padrão para Arial, com fallback para sans-serif */
-    background-color: #f4f4f4; /* Cor de fundo clara para todo o corpo da página */
+    background-color: #ffffff; /* Cor de fundo clara para todo o corpo da página */
     margin: 0; /* Remove a margem padrão do corpo */
     padding: 0; /* Remove o preenchimento (padding) padrão do corpo */
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
 /* Fonte */
 .fontes {
     font-family: 'Verdana', sans-serif; /* Define a fonte padrão para Verdana, com fallback para sans-serif */
+}
+.home1 {
+    background: url(/static/img/bg.jpeg) no-repeat center center;
+    background-size: cover;
 }
 
 /* Container */
