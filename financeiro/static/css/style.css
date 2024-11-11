@@ -23,10 +23,10 @@ h1 {
     margin-bottom: 20px; /* Adiciona uma margem de 20px abaixo do título */
 }
 
+a {
+    text-decoration: none;
 
-
-
-
+}
 
 /* Filtros */
 /* Filtros */
@@ -168,10 +168,16 @@ h1 {
 .metric h2 {
     margin-top: 0; /* Remove a margem superior do título das métricas */
     color: #333; /* Define a cor do texto do título das métricas em cinza escuro */
+    text-align: center;
 }
 
+
 .metric p {
-    margin: 5px 0; /* Define uma margem vertical de 5px entre os parágrafos das métricas */
+    font-size: 24px;
+    margin: 5px 0 0;
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
 }
 
 
@@ -184,6 +190,7 @@ table {
 
 table, th, td {
     border: 1px solid #ddd; /* Define uma borda fina e cinza clara ao redor da tabela, cabeçalhos e células */
+
 }
 
 th, td {
@@ -195,6 +202,7 @@ th, td {
 thead {
     background-color: #f1f1f1; /* Define um fundo cinza claro para o cabeçalho da tabela */
     color: #333; /* Define a cor do texto do cabeçalho da tabela em cinza escuro */
+    
 }
 
 tr:nth-child(even) {
