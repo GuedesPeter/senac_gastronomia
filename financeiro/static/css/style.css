@@ -16,6 +16,7 @@ body {
     background-size: cover;
 }
 
+
 /* Container */
 
 
@@ -282,7 +283,7 @@ h1 {
     
 }
 
-.btn-info {
+.btn-info1 {
     background-color: #d16919;
     border: none;
     border-radius: 10px;
@@ -293,7 +294,7 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-.btn-info:hover {
+.btn-info1:hover {
     background-color: #f5690c;
     color: white
-  }
+}
