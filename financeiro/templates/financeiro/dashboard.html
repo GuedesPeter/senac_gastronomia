@@ -1,12 +1,8 @@
 {% extends 'base_financeiro.html' %}
 
 {% block content %}
-    <div class="container">
+<div class="container">
     <h1>Dashboard Financeiro</h1>
-
-    <div class="d-flex gap-2 mb-2">
-        <a href="{% url 'financeiro' %}" class="btn btn-info">Voltar Financeiro</a>
-    </div>
 
     <div class="chart-container">
         <!-- Gráfico de Pizza - Categorias -->
@@ -166,4 +162,9 @@
         });
     </script>
 </div>
+
+<div class="button-container">
+    <a href="{% url 'financeiro' %}" class="btn btn-info">Voltar Financeiro</a>
+</div>
+
 {% endblock %}
