@@ -33,6 +33,17 @@ h1 {
     margin-top: 30px;
 }
 
+.h11 {
+    text-align: center; /* Centraliza o texto do título (h1) */
+    font-size: 60px;
+    color: #ffffff; /* Cor do texto do título em cinza escuro */
+    border-bottom: 8px solid #ffffff; /* Adiciona uma borda inferior de 3px em cinza escuro */
+    padding-bottom: 20px; /* Adiciona um preenchimento de 10px na parte inferior do título */
+    margin-bottom: 20px; /* Adiciona uma margem de 20px abaixo do título */
+    text-shadow: 6px 6px 14px rgba(0, 0, 0, 0.7);
+    margin-top: 30px;
+}
+
 a {
     text-decoration: none;
     font-size: 18px;
@@ -305,6 +316,7 @@ h1 {
     padding: 15px 40px;
     margin-top: 50px;
     transition: background-color 0.3s ease;
+    font-weight: bold;
 }
 
 .btn-info1:hover {
