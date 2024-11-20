@@ -18,24 +18,34 @@ class SigupView(TemplateView):
     template_name = 'autenticacao/sigup.html'
 
     def post(self, request, *args, **kwargs):
-        username = request.POST.get('username')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        username = request.POST.get('username', '').strip()
+        password1 = request.POST.get('password1', '').strip()
+        password2 = request.POST.get('password2', '').strip()
+
+        # Verifica se todos os campos foram preenchidos
+        if not username or not password1 or not password2:
+            return render(request, self.template_name, {
+                'error_message': 'Todos os campos são obrigatórios.'
+            })
 
         # Verifica se o usuário já existe
         if User.objects.filter(username=username).exists():
-            return render(request, self.template_name, {'error_message': 'Usuário já existe.'})
+            return render(request, self.template_name, {
+                'error_message': 'Usuário já existe.'
+            })
 
         # Verifica se as senhas são iguais
         if password1 != password2:
-            return render(request, self.template_name, {'error_message': 'As senhas não coincidem.'})
+            return render(request, self.template_name, {
+                'error_message': 'As senhas não coincidem.'
+            })
 
         # Se chegou até aqui, cria o usuário
         user = User.objects.create_user(username=username, password=password1)
         user.save()
 
-        # Redireciona para a página 'home.html' após o cadastro bem-sucedido, DEVERÁ REDIRECIONAR PARA A LISTA.
-        return redirect('sigin')
+        # Redireciona para a página da lista após o cadastro bem-sucedido
+        return redirect('lista')
 
 
 class SiginView(TemplateView):
