@@ -32,12 +32,12 @@ body {
 
 .logo {
   margin: auto;
-  height: 200px;
+  height: 350px;
 }
 
 img, svg {
   vertical-align: middle;
-  height: 200px;
+  height: 350px;
 }
 
 .menu {
@@ -54,10 +54,11 @@ img, svg {
 /* Estilo do formulário de login */
 .card {
   text-align: left;
-  background-color: #ffffff;
+  background-color: transparent;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  backdrop-filter: blur(15px);
 }
 
 .card-body {
@@ -66,8 +67,9 @@ img, svg {
 
 .card h1 {
   font-size: 2rem;
-  color: #333333;
+  color: #f7f3f3;
   margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 /* Estilo das mensagens de erro */
@@ -86,9 +88,18 @@ img, svg {
 .form-label {
   text-align: left;
   font-weight: 600;
-  color: #333333;
+  color: #fdfdfd;
   margin-bottom: 5px;
   display: block;
+}
+
+.text1 {
+  text-align: center;
+  font-size: 2em !important; 
+  color: #fdfdfd;
+  margin-bottom: 5px;
+  display: block;
+  margin-top: 50px;
 }
 
 /* Estilo dos campos de entrada */
@@ -102,12 +113,22 @@ img, svg {
 
 /* Estilo do botão */
 .btn-primary {
-  background-color: #007bff;
+  background-color: #256cb9;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   color: #ffffff;
   font-size: 1rem;
-  padding: 10px;
+  padding: 12px 40px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary2{
+  background-color: #e36e1a;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 12px 40px;
   transition: background-color 0.3s ease;
 }
 
@@ -115,6 +136,10 @@ img, svg {
   background-color: #0056b3;
 }
 
+.btn-primary2:hover {
+  background-color: #ff6803;
+  color: white;
+}
 /* Sidebar */
 .sidebar {
   background: rgba(0, 0, 0, 0.7);
@@ -231,8 +256,9 @@ h4 {
 }
 
 .table tbody .btn-outline-secondary {
-  border-color: #6c757d;
+  border-color: #386082;
   color: #6c757d;
+
 }
 
 .table tbody .btn-outline-secondary:hover {

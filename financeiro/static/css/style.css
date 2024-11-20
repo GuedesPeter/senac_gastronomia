@@ -1,34 +1,55 @@
 /* Corpo */
 body {
     font-family: 'Arial', sans-serif; /* Define a fonte padrão para Arial, com fallback para sans-serif */
-    background-color: #f4f4f4; /* Cor de fundo clara para todo o corpo da página */
+    background-color: #ffffff; /* Cor de fundo clara para todo o corpo da página */
     margin: 0; /* Remove a margem padrão do corpo */
     padding: 0; /* Remove o preenchimento (padding) padrão do corpo */
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
 }
 
 /* Fonte */
 .fontes {
     font-family: 'Verdana', sans-serif; /* Define a fonte padrão para Verdana, com fallback para sans-serif */
 }
-
-/* Container */
+.home1 {
+    background: url(/static/css/img/bg7.jpg) no-repeat center center;
+    background-size: cover;
+    background-size: 100% 100%; /* Expande a imagem para preencher toda a área */
+    height: 100vh; /* Garante que a altura ocupe 100% da altura da janela */
+    margin: 0; /* Remove margens, se houver */
+    
+}
 
 
 /* Título */
 h1 {
     text-align: center; /* Centraliza o texto do título (h1) */
-    color: #333; /* Cor do texto do título em cinza escuro */
-    border-bottom: 3px solid #333; /* Adiciona uma borda inferior de 3px em cinza escuro */
-    padding-bottom: 10px; /* Adiciona um preenchimento de 10px na parte inferior do título */
+    font-size: 60px;
+    color: #ffffff; /* Cor do texto do título em cinza escuro */
+    border-bottom: 8px solid #ffffff; /* Adiciona uma borda inferior de 3px em cinza escuro */
+    padding-bottom: 20px; /* Adiciona um preenchimento de 10px na parte inferior do título */
     margin-bottom: 20px; /* Adiciona uma margem de 20px abaixo do título */
+    text-shadow: 6px 6px 14px rgba(0, 0, 0, 0.7);
+    margin-top: 30px;
+}
+
+.h11 {
+    text-align: center; /* Centraliza o texto do título (h1) */
+    font-size: 60px;
+    color: #ffffff; /* Cor do texto do título em cinza escuro */
+    border-bottom: 8px solid #ffffff; /* Adiciona uma borda inferior de 3px em cinza escuro */
+    padding-bottom: 20px; /* Adiciona um preenchimento de 10px na parte inferior do título */
+    margin-bottom: 20px; /* Adiciona uma margem de 20px abaixo do título */
+    text-shadow: 6px 6px 14px rgba(0, 0, 0, 0.7);
+    margin-top: 30px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 18px;
 }
 
 
-
-
-
-
-/* Filtros */
 /* Filtros */
 .filters {
     margin-bottom: 20px; /* Margem inferior de 20px */
@@ -37,7 +58,7 @@ h1 {
 .filters form {
     display: flex; /* Usa layout flexível para o formulário de filtros */
     flex-wrap: wrap; /* Permite que os elementos se movam para a linha seguinte, se necessário */
-    gap: 10px; /* Espaço de 10px entre os elementos */
+    gap: 10px 40px; /* Espaço de 10px entre os elementos */
     justify-content: flex-start; /* Alinha os itens ao início do container (lado esquerdo) */
     align-items: center; /* Alinha os itens verticalmente ao centro */
 }
@@ -46,17 +67,17 @@ h1 {
 .filters .form-select {
     flex: 1; /* Faz com que os inputs e selects cresçam para ocupar o espaço disponível */
     min-width: 120px; /* Define uma largura mínima para evitar que os elementos fiquem muito pequenos */
-    padding: 8px; /* Adiciona preenchimento dentro dos elementos */
+    padding: 14px 10px; /* Adiciona preenchimento dentro dos elementos */
     border: 1px solid #ddd; /* Borda fina e cinza clara */
     border-radius: 4px; /* Cantos arredondados */
-    font-size: 14px; /* Tamanho da fonte */
+    font-size: 12px; /* Tamanho da fonte */
     box-sizing: border-box; /* Inclui o padding e a borda no cálculo da largura total */
 }
 
 .filters .btn {
     flex: 1; /* Faz com que os botões cresçam para ocupar o espaço disponível */
     min-width: 120px; /* Define uma largura mínima para evitar que os botões fiquem muito pequenos */
-    padding: 8px; /* Adiciona preenchimento dentro dos botões */
+    padding: 10px; /* Adiciona preenchimento dentro dos botões */
     display: flex; /* Alinha o texto centralizado */
     justify-content: center; /* Centraliza o texto horizontalmente */
     align-items: center; /* Centraliza o texto verticalmente */
@@ -69,40 +90,47 @@ h1 {
     margin-top: 10px; /* Adiciona margem superior para separar os botões dos inputs */
     width: 100%; /* Faz com que o grupo de botões ocupe a largura total disponível */
     justify-content: flex-start; /* Alinha os botões ao início do container (lado esquerdo) */
+    
 }
 
 /* Estilo dos Botões */
 .filters .btn-primary {
-    background-color: #007bff; /* Cor do botão Filtrar */
+    background-color: #0056b3;
     color: #fff; /* Cor do texto */
     border: none; /* Remove a borda */
     border-radius: 4px; /* Cantos arredondados */
+    font-size: 20px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);
 }
 
 .filters .btn-primary:hover {
-    background-color: #0056b3; /* Efeito hover do botão Filtrar */
+    background-color: #0195ff; /* Efeito hover do botão Filtrar */
 }
 
 .filters .btn-secondary {
-    background-color: #dc3545; /* Cor do botão Limpar */
+    background-color: #eb5e26; /* Cor do botão Limpar */
     color: #fff; /* Cor do texto */
     border: none; /* Remove a borda */
     border-radius: 4px; /* Cantos arredondados */
+    font-size: 20px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);
 }
 
 .filters .btn-secondary:hover {
-    background-color: #c82333; /* Efeito hover do botão Limpar */
+    background-color: #ff0000; /* Efeito hover do botão Limpar */
 }
 
 .filters .btn-info {
-    background-color: #17a2b8; /* Cor do botão Gerar Relatório PDF */
+    background-color: #2fae1c; /* Cor do botão Gerar Relatório PDF */
     color: #fff; /* Cor do texto */
     border: none; /* Remove a borda */
     border-radius: 4px; /* Cantos arredondados */
+    font-size: 20px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);
 }
 
 .filters .btn-info:hover {
-    background-color: #138496; /* Efeito hover do botão Gerar Relatório PDF */
+    background-color: #ffee00; /* Efeito hover do botão Gerar Relatório PDF */
 }
 
 
@@ -119,6 +147,7 @@ h1 {
     text-decoration: none; /* Remove o sublinhado dos links */
     font-size: 14px; /* Tamanho da fonte */
     margin-right: 10px; /* Espaço à direita dos botões */
+    margin: 0;
 }
 
 .filters button {
@@ -168,10 +197,17 @@ h1 {
 .metric h2 {
     margin-top: 0; /* Remove a margem superior do título das métricas */
     color: #333; /* Define a cor do texto do título das métricas em cinza escuro */
+    text-align: center;
+    font-weight: bold;
 }
 
+
 .metric p {
-    margin: 5px 0; /* Define uma margem vertical de 5px entre os parágrafos das métricas */
+    font-size: 28px;
+    margin: 5px 0 0;
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
 }
 
 
@@ -184,6 +220,7 @@ table {
 
 table, th, td {
     border: 1px solid #ddd; /* Define uma borda fina e cinza clara ao redor da tabela, cabeçalhos e células */
+
 }
 
 th, td {
@@ -195,6 +232,7 @@ th, td {
 thead {
     background-color: #f1f1f1; /* Define um fundo cinza claro para o cabeçalho da tabela */
     color: #333; /* Define a cor do texto do cabeçalho da tabela em cinza escuro */
+    
 }
 
 tr:nth-child(even) {
@@ -227,14 +265,14 @@ tr:hover {
 
 
 .home-bg {
-  height: 100vh; /* Ocupa 100% da altura da tela */
-  width: 100vw;  /* Ocupa 100% da largura da tela */
-  background: 
-      url(/static/img/bg2.jpg) no-repeat center center;
-  background-size: cover;
+    height: 100vh; /* Ocupa 100% da altura da tela */
+    width: 100vw;  /* Ocupa 100% da largura da tela */
+    background: 
+    url(/static/img/bg2.jpg) no-repeat center center;
+    background-size: cover;
 }
 
-  
+
 .menu {
     background: 
         url(/static/img/home_bgmenu.jpg) no-repeat center center;
@@ -257,3 +295,103 @@ tr:hover {
     margin: 0px;              /* Ajuste aqui: reduzido para 2px para diminuir o espaçamento */
 }
 
+h1 {
+
+    color: white;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    
+}
+
+.btn-info1 {
+    background-color: #d16919;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1.3rem;
+    padding: 15px 40px;
+    margin-top: 50px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-info1:hover {
+    background-color: #f5690c;
+    color: white
+}
+
+/* PAGINAÇÃO */
+
+/* Container de navegação */
+.d-flex {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilo do texto do número da página */
+.text-light {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #007bff; /* Azul */
+    color: #fff; /* Branco */
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    
+}
+
+/* Estilo da navegação de página */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo dos itens de navegação */
+.page-item {
+    margin: 0 5px;
+}
+
+/* Estilo dos links da página */
+.page-link {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #007bff; /* Azul */
+    color: #fff; /* Branco */
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    
+}
+
+/* Cor de hover para os links de navegação */
+.page-link:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+    color: #fff; /* Branco */
+}
+
+/* Estilo para a página ativa */
+.page-item.active .page-link {
+    background-color: #ff7f00; /* Laranja */
+    color: #fff; /* Branco */
+}
+
+/* Estilo para os links de navegação desabilitados */
+.page-item.disabled .page-link {
+    background-color: #ddd; /* Cor de fundo para desabilitado */
+    color: #bbb; /* Cor do texto para desabilitado */
+    cursor: not-allowed;
+}
+
+/* Estilo para os links de navegação quando clicados */
+.page-item a:focus, .page-item a:active {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul */
+}

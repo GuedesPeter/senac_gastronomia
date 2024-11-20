@@ -78,3 +78,37 @@ a {
   .bg-light {
     --bs-bg-opacity: 100%;
   }
+
+ /* Estilo para o botão dentro da div .logout-button */
+.logout-button {
+  text-align: center; /* Centraliza o conteúdo dentro da div */
+  margin-top: 20px;
+  margin-bottom: 1rem; /* Espaçamento abaixo da div */
+}
+
+.logout-button .btn {
+  background-color: #dc5c31; /* Cor de fundo vermelha (classe btn-danger) */
+  border: none; /* Remove a borda */
+  color: #ffffff; /* Cor do texto em branco */
+  font-size: 1.25rem; /* Tamanho da fonte */
+  padding: 15px 50px; /* Espaçamento interno */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
+}
+
+.logout-button .btn:hover {
+  background-color: #c82333; /* Cor mais escura ao passar o mouse (efeito hover) */
+}
+
+.logout-button .btn:focus {
+  outline: none; /* Remove o contorno ao focar no botão */
+}
+
+.text1 {
+  text-align: center;
+  font-size: 2em !important; 
+  color: #fdfdfd;
+  margin-bottom: 5px;
+  display: block;
+  margin-top: 100px;
+}

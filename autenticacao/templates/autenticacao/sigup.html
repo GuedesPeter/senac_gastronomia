@@ -11,9 +11,9 @@
                 <form method="POST" class="card card-body">
                     {% csrf_token %}
                     <div class="logo">
-                        <img src="{% static 'img/logo_sg.png' %}" alt="logo">
+                        <img src="{% static 'img/sg2.jpg' %}" alt="logo">
                     </div>
-                    <h1 class="text-center"> Cadastre-se</h1> 
+                    <h1 class="text-center"> Cadastre-se!</h1> 
     
                     {% if error_message %}
                         <div class="alert alert-danger" role="alert">
@@ -23,27 +23,30 @@
     
                     <div class="mb-3">
                         <label for="username" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username">
+                        <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username" placeholder="Digite seu nome de usuário">
                     </div>
     
                     <div class="mb-3">
                         <label for="password1" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password1" name="password1">
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Digite sua senha">
                     </div>
     
                     <div class="mb-3">
                         <label for="password2" class="form-label">Confirmar Senha</label>
-                        <input type="password" class="form-control" id="password2" name="password2">
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Digite novamente sua senha">
                     </div>
     
                     <!-- Colocar os botões lado a lado -->
                     <div class="d-flex justify-content-between">
-                        <a href="{% url 'sigin' %}" class="btn btn-outline-secondary">Voltar</a>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <a href="{% url 'sigin' %}" class="btn btn-primary2">VOLTAR</a>
+                        <button type="submit" class="btn btn-primary">ENVIAR</button>
                     </div>
                     
                 </form>
             </div>
+            <div class="text1"> 
+                <h1 style="font-size: 60%;" > © Todos os direitos reservados - Senac 2024</h1>
+                </div>
         </div>
     </main>
     

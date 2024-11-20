@@ -10,64 +10,15 @@
     <title>SENAC GASTRONOMIA</title>
 </head>
 
-<body class="#">
-{% comment %} <body class="home"> {% endcomment %}
-    <nav class="navbar navbar-dark bg-light menu">
-        <div class="container">
-          <a class="navbar-brand fw-bold" href="/">
-            {% comment %} <img src="{% static 'img/logo_sg.png' %}" alt="logo"> {% endcomment %}
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'escolha' %}">Escolha</a>
-                    </li>
-                    <form action="{% url 'exit' %}" method="post">
-                      {% csrf_token %}
-                      <button type="submit" class="nav-link btn btn-link text-light">Sair</button>
-                    </form>
-                {% else %}
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/sigup">Cadastre-se</a>
-                    </li>
-                    {% comment %} <li class="nav-item">
-                      <a class="nav-link" href="/sigin">Login</a>
-                    </li> {% endcomment %}
-                {% endif %}
-              </ul>
-            </div>
-          </div>
-        </div>
-    </nav>
+<body class='home1'>
+  <main>
+      <div class="container mt-4">
+          {% block content %}
+          {% endblock %}
+      </div>
+  </main>
+</body>
 
-    {% comment %} <div class="container mt-5">
-      
-        <!-- Exibir mensagens -->
-        {% if messages %}
-            <div>
-                {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %} {% endcomment %}
-
-        
-    {% block content %}
-    {% endblock %}
       
 </body>
 </html>
