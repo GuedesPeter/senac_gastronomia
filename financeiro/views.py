@@ -5,7 +5,7 @@ from django.shortcuts import render
 from estoque.models import Alimento
 from datetime import datetime
 from django.db.models import Sum
-from .models import Alimento
+from .models import Alimento, Categoria
 from django.core.paginator import Paginator
 
 def financeiro(request):
@@ -15,6 +15,7 @@ def financeiro(request):
     data_entrada = request.GET.get('data_entrada', '')
     fornecedor = request.GET.get('fornecedor', '')
     marca = request.GET.get('marca', '')
+    nome = request.GET.get('nome', '')
     ordenar_por = request.GET.get('ordenar_por', 'nome')  # Coluna padrão para ordenar
 
     def converter_data(data_brasileira):
@@ -40,6 +41,8 @@ def financeiro(request):
         alimentos = alimentos.filter(nome_fornecedor__icontains=fornecedor)
     if marca:
         alimentos = alimentos.filter(marca__icontains=marca)
+    if nome:
+        alimentos = alimentos.filter(nome__icontains=nome)
 
     # Ordenar alimentos
     alimentos = alimentos.order_by(ordenar_por)
@@ -52,6 +55,9 @@ def financeiro(request):
     # Calcular métricas
     quantidade_total = sum([alimento.quantidade for alimento in alimentos])
     custo_total = sum([alimento.valor * alimento.quantidade for alimento in alimentos])
+    
+        # Obter todas as categorias
+    categorias = Categoria.objects.all()
 
     # Contexto para o template
     context = {
@@ -63,7 +69,9 @@ def financeiro(request):
         'data_entrada': data_entrada,
         'fornecedor': fornecedor,
         'marca': marca,
-        'ordenar_por': ordenar_por
+        'nome': nome,
+        'ordenar_por': ordenar_por,
+        'categorias': categorias  # Adicionando categorias ao contexto
     }
     
     return render(request, 'financeiro/financeiro.html', context)
