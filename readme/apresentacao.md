@@ -82,6 +82,7 @@ Tela inicial para o controle financeiro, mostra uma visão geral de entradas e s
 
 ![Arquitetura](img/home_Financeiro.png)
 
+
 ### Dashboard
 Tela de dashboard, exibe gráficos e métricas importantes sobre o estoque e as finanças.
 - Objetivo: Visão clara e de fácil acesso sobre o estado geral do sistema financeiro.
