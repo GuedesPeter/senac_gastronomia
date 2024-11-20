@@ -80,7 +80,7 @@ Tela que exibe os itens vencidos no estoque, ajudando a identificar alimentos qu
 Tela inicial para o controle financeiro, mostra uma visão geral de entradas e saídas de valores.
 - Objetivo: Ajudar a gerenciar as finanças da operação de forma eficiente.
 
-![Arquitetura](img/home_Financeiro.png)
+![Arquitetura](img/home_Fin.png)
 
 
 ### Dashboard
