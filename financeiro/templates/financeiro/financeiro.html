@@ -8,7 +8,12 @@
     <div class="filters">
         <form method="get" class="row g-2 justify-content-center" >
             <div class="col-md-1 m-4">
-                <input type="text" name="categoria" class="form-control" placeholder="Categoria" value="{{ categoria }}">
+                <select name="categoria" class="form-select">
+                    <option value="">Categorias</option>
+                    {% for cat in categorias %}
+                        <option value="{{ cat.nome }}" {% if categoria == cat.nome %}selected{% endif %}>{{ cat.nome }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="col-md-1 m-4">
                 <input type="text" name="validade" class="form-control" placeholder="Validade" value="{{ validade }}">
@@ -23,12 +28,7 @@
                 <input type="text" name="marca" class="form-control" placeholder="Marca" value="{{ marca }}">
             </div>
             <div class="col-md-1 m-4">
-                <select name="ordenar_por" class="form-select">
-                    <option value="nome" {% if ordenar_por == "nome" %}selected{% endif %}>Nome</option>
-                    <option value="quantidade" {% if ordenar_por == "quantidade" %}selected{% endif %}>Quantidade</option>
-                    <option value="valor" {% if ordenar_por == "valor" %}selected{% endif %}>Valor</option>
-                    <option value="data_entrada" {% if ordenar_por == "data_entrada" %}selected{% endif %}>Data de Entrada</option>
-                </select>
+                <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ nome }}">
             </div>
             
             <div class="d-flex gap-2 mb-2">
