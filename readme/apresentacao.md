@@ -80,18 +80,19 @@ Tela que exibe os itens vencidos no estoque, ajudando a identificar alimentos qu
 Tela inicial para o controle financeiro, mostra uma visão geral de entradas e saídas de valores.
 - Objetivo: Ajudar a gerenciar as finanças da operação de forma eficiente.
 
-![Arquitetura](img/Home_Financeiro.png)
+![Arquitetura](img/home_Financeiro.png)
 
 ### Dashboard
 Tela de dashboard, exibe gráficos e métricas importantes sobre o estoque e as finanças.
 - Objetivo: Visão clara e de fácil acesso sobre o estado geral do sistema financeiro.
 
-![Arquitetura](img/Dashboard.png)
+![Arquitetura](img/dash_financeiro.png)
 
 ### PDF
 Recurso para gerar relatórios em PDF, dados financeiros.
 - Objetivo: Permitir a exportação de dados para relatórios e análises externas.
 
-![Arquitetura](img/pdf.png)
+![Arquitetura](img/relatorio_pdf.png)
+
 
 
