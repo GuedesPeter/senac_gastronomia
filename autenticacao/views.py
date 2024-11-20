@@ -17,7 +17,7 @@ class SigupView(TemplateView):
         password1 = request.POST.get('password1', '').strip()
         password2 = request.POST.get('password2', '').strip()
 
-        # Verifica se todos os campos foram preenchidos
+        # Verifica se todos os campos do Cadastre-se foram preenchidos
         if not username or not password1 or not password2:
             return render(request, self.template_name, {
                 'error_message': 'Todos os campos são obrigatórios.'
