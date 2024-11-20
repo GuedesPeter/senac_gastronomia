@@ -7,11 +7,6 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView
 
-# Create your views here.
-
-
-# class HomeView(TemplateView):
-#     template_name = 'autenticacao/home.html'
 
 
 class SigupView(TemplateView):
