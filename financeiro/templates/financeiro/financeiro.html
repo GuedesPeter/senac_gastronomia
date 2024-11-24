@@ -34,7 +34,7 @@
             <div class="d-flex gap-2 mb-2">
                 <button type="submit" class="btn btn-primary">Filtrar</button>
                 <a href="{% url 'financeiro' %}" class="btn btn-secondary">Limpar Filtros</a>
-                <a href="{% url 'gerar_pdf' %}?categoria={{ categoria }}&validade={{ validade }}&data_entrada={{ data_entrada }}&fornecedor={{ fornecedor }}&marca={{ marca }}" class="btn btn-info">Gerar Relatório PDF</a>
+                <a href="{% url 'gerar_pdf' %}?categoria={{ categoria }}&validade={{ validade }}&data_entrada={{ data_entrada }}&fornecedor={{ fornecedor }}&marca={{ marca }}&nome={{ nome }}" class="btn btn-info">Gerar Relatório PDF</a>
                 <a href="{% url 'dashboard' %}" class="btn btn-info">Dashboard</a>
                 <a href="{% url 'alimento_list' %}" class="btn btn-info">Estoque</a>
             </div>
