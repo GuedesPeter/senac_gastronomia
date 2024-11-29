@@ -84,6 +84,7 @@ def gerar_pdf(request):
     data_entrada = request.GET.get('data_entrada', '')
     fornecedor = request.GET.get('fornecedor', '')
     marca = request.GET.get('marca', '')
+    nome = request.GET.get('nome', '')
     ordenar_por = request.GET.get('ordenar_por', 'nome')
 
     def converter_data(data_brasileira):
@@ -108,6 +109,8 @@ def gerar_pdf(request):
         alimentos = alimentos.filter(nome_fornecedor__icontains=fornecedor)
     if marca:
         alimentos = alimentos.filter(marca__icontains=marca)
+    if nome:
+        alimentos = alimentos.filter(nome__icontains=nome)
 
     # Ordenar alimentos
     alimentos = alimentos.order_by(ordenar_por)
@@ -126,6 +129,7 @@ def gerar_pdf(request):
         'data_entrada': data_entrada,
         'fornecedor': fornecedor,
         'marca': marca,
+        'nome': nome,
         'ordenar_por': ordenar_por
     }
 
@@ -146,6 +150,7 @@ def gerar_pdf(request):
         return HttpResponse('Erro ao gerar PDF', status=500)
     
     return response
+
 # DASHBOARD VIEW
 def dashboard(request):
     alimentos = Alimento.objects.all()
